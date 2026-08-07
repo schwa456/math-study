@@ -158,6 +158,34 @@ figcaption b{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; co
 .refs li{margin:.42rem 0}
 
 /* 도표 내부 텍스트 */
+/* ── 강의 자료 요소 ──────────────────────────────── */
+.lesson{
+  border:1px solid var(--rule); background:var(--paper-2);
+  padding:.9rem 1rem; margin:1.3rem 0;
+}
+.lesson h4{
+  margin:0 0 .4rem; font-family:var(--mono); font-size:.7rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--struct); font-weight:600;
+}
+.lesson ul{margin:.3rem 0 .8rem}
+.lesson .meta{font-size:.85rem; color:var(--ink-2); margin:0}
+.env.work{border-left-color:var(--dim); background:#fff}
+.env.work .env-label{color:var(--dim)}
+.steps{counter-reset:st; list-style:none; padding-left:0; margin:.6rem 0}
+.steps li{
+  counter-increment:st; position:relative; padding-left:1.9rem; margin:.5rem 0;
+}
+.steps li::before{
+  content:counter(st); position:absolute; left:0; top:.15rem;
+  font-family:var(--mono); font-size:.68rem; font-weight:600; color:var(--struct);
+  border:1px solid var(--struct); background:var(--struct-soft);
+  width:1.35rem; height:1.35rem; line-height:1.25rem; text-align:center;
+}
+.qa{border-top:1px dotted var(--rule); padding-top:.55rem; margin-top:.9rem}
+.qa .q{font-weight:650}
+.qa .a{color:var(--ink-2); font-size:.96rem; margin-top:.2rem}
+.pitfall{border-left-color:var(--warn); background:var(--warn-soft)}
+
 /* ── 목차 페이지 ─────────────────────────────────── */
 .cta{margin:1.6rem 0 2.2rem}
 .cta a{
@@ -186,6 +214,16 @@ a.doc{
 }
 a.doc:hover{border-left-color:var(--struct); background:var(--struct-soft)}
 .doc-t{display:block; font-weight:650; font-size:1rem; letter-spacing:-0.01em}
+.doc-n{
+  display:inline-block; font-family:var(--mono); font-size:.7rem; font-weight:600;
+  color:var(--struct); border:1px solid var(--struct); background:var(--struct-soft);
+  width:1.5rem; text-align:center; margin-right:.5rem; vertical-align:.08em;
+}
+.doc-f{
+  float:right; font-family:var(--mono); font-size:.66rem; letter-spacing:.06em;
+  color:var(--ink-3); font-weight:500; background:var(--paper-3);
+  padding:.1rem .35rem; margin-left:.5rem;
+}
 .doc-d{display:block; font-size:.85rem; color:var(--ink-2); margin-top:.15rem; line-height:1.55}
 .foot{font-size:.85rem; color:var(--ink-3); margin-top:1rem}
 
