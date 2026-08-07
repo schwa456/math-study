@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>측도·해석 프라이머 — 학습 자료</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)'],['$','$']],
+       displayMath:[['\\[','\\]'],['$$','$$']],
+       tags:'none', processEscapes:true},
+  svg:{fontCache:'global', scale:1.0},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="assets/tex-svg.js"></script>
+</head>
+<body>
+<header class="sheet-head"><div class="inner">
+  <div class="eyebrow"><span>학습 자료 웹 · <b>본편</b></span></div>
+  <h1>측도·해석 프라이머</h1>
+  <p class="subtitle">본편의 증명을 읽기 위한 최소 도구 상자</p>
+  <div class="section-view" aria-label="학습 자료 층 구조"><div class="floor done"><span class="lbl">1층</span><span>확률 기초 · 선형대수 · 다변수 미적분 · 실해석</span></div><div class="floor here"><span class="lbl">본편</span><span>프라이머 ←  프라이머 · 분포 계보 · 지수족 · MaxEnt</span></div><div class="floor"><span class="lbl">2층</span><span>측도론 · 복소해석 · 볼록최적화</span></div><div class="floor"><span class="lbl">3층</span><span>정보기하 · 변분추론</span></div></div>
+  <p class="subtitle" style="margin-top:.6rem"><a href="index.html">← 목차</a> &nbsp;·&nbsp; <a href="roadmap.html">학습 로드맵</a></p>
+</div></header>
+<main>
+<ul class="toc"><li><a href="#s1">0.1 측도의 어휘</a></li><li><a href="#s2">0.2 수렴 정리</a></li><li><a href="#s3">0.3 지지선·젠센</a></li><li><a href="#s4">0.4 횔더</a></li><li><a href="#s5">0.5 감마함수</a></li><li><a href="#s6">0.6 MGF 유일성</a></li><li><a href="#s7">0.7 변분 도함수</a></li><li><a href="#s8">0.8 참고 문헌</a></li></ul>
+<div class="env note">
+<span class="env-label">이 문서의 자리</span>
+<p>본편(분포 계보·지수족·MaxEnt)의 증명에 실제로 등장하는 해석학 도구만 모은 상자입니다.
+증명이 필요한 것은 증명하고, 2층에서 제대로 다룰 것은 <b>진술만</b> 해 둡니다.
+이 문서를 완전히 이해하고 넘어갈 필요는 없습니다 — 본편을 읽다 막히면 되돌아오는 용도입니다.</p>
+</div>
+
+<h2 id="s1"><span class="num">0.1</span>σ-대수와 측도 — 최소한의 어휘</h2>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>\(\mathcal F\subseteq 2^X\)가 <b>σ-대수</b>: \(X\in\mathcal F\), 여집합에 닫힘, 가산합집합에 닫힘.
+\(\mu:\mathcal F\to[0,\infty]\)가 <b>측도</b>: \(\mu(\varnothing)=0\)이고 서로소 가산합에 대해 가법적.</p>
+</div>
+
+<p>왜 모든 부분집합을 쓸 수 없는지, 르베그 측도를 어떻게 <b>구성</b>하는지는
+2층 <a href="measure-theory.html">측도론</a> 문서의 몫입니다.
+여기서는 "적분 기호 \(\int f\,d\mu\)가 무엇에 대한 적분인지"를 읽을 수 있으면 됩니다.</p>
+
+<div class="env note">
+<span class="env-label">기억할 한 가지</span>
+<p>확률은 전체 질량이 1인 측도이고, 기댓값은 그 측도에 대한 적분입니다.
+\(\mathbb E[X]=\int X\,dP\). 이산이든 연속이든 같은 기호로 쓸 수 있다는 것이
+측도론적 표기의 실용적 이득입니다.</p>
+</div>
+
+<h2 id="s2"><span class="num">0.2</span>세 수렴 정리 (진술)</h2>
+
+<div class="env">
+<span class="env-label">MCT · 파투 · DCT</span>
+<p><b>단조수렴</b>: \(0\le f_n\uparrow f\) ⟹ \(\int f_n\uparrow\int f\).<br>
+<b>파투</b>: \(f_n\ge0\) ⟹ \(\int\liminf f_n\le\liminf\int f_n\).<br>
+<b>지배수렴</b>: \(f_n\to f\) a.e., \(|f_n|\le g\), \(\int g<\infty\) ⟹ \(\int f_n\to\int f\).</p>
+</div>
+
+<p>본편에서 쓰이는 자리는 두 곳입니다 — 급수와 적분의 순서를 바꿀 때(MCT),
+그리고 적률생성함수를 매개변수로 미분할 때(DCT). 증명은 2층에 있습니다.</p>
+
+<h2 id="s3"><span class="num">0.3</span>지지선 보조정리와 젠센</h2>
+
+<div class="env">
+<span class="env-label">보조정리 — 지지선</span>
+<p>볼록함수 \(\varphi\)와 내부점 \(m\)에 대해, 모든 \(x\)에서
+\(\varphi(x)\ge \varphi(m)+s\,(x-m)\)를 만족하는 \(s\)가 존재합니다
+(\(\varphi\)가 미분가능하면 \(s=\varphi'(m)\)).</p>
+</div>
+
+<figure><svg viewBox="0 0 680 330" role="img" xmlns="http://www.w3.org/2000/svg"><line x1="38" y1="266.36499068901304" x2="664" y2="266.36499068901304" stroke="var(--rule-2)"/><line x1="83.36231884057972" y1="24" x2="83.36231884057972" y2="298" stroke="var(--rule-2)"/><line x1="83.36231884057972" y1="266.36499068901304" x2="83.36231884057972" y2="270.36499068901304" stroke="var(--rule-2)"/><text class="lab-s" x="83.36231884057972" y="281.36499068901304" text-anchor="middle">0</text><line x1="210.37681159420288" y1="266.36499068901304" x2="210.37681159420288" y2="270.36499068901304" stroke="var(--rule-2)"/><text class="lab-s" x="210.37681159420288" y="281.36499068901304" text-anchor="middle">a</text><line x1="391.8260869565217" y1="266.36499068901304" x2="391.8260869565217" y2="270.36499068901304" stroke="var(--rule-2)"/><text class="lab-s" x="391.8260869565217" y="281.36499068901304" text-anchor="middle">E[X]</text><line x1="573.2753623188406" y1="266.36499068901304" x2="573.2753623188406" y2="270.36499068901304" stroke="var(--rule-2)"/><text class="lab-s" x="573.2753623188406" y="281.36499068901304" text-anchor="middle">b</text><line x1="79.36231884057972" y1="266.36499068901304" x2="83.36231884057972" y2="266.36499068901304" stroke="var(--rule-2)"/><text class="lab-s" x="76.36231884057972" y="269.86499068901304" text-anchor="end">0</text><line x1="79.36231884057972" y1="164.31657355679704" x2="83.36231884057972" y2="164.31657355679704" stroke="var(--rule-2)"/><text class="lab-s" x="76.36231884057972" y="167.81657355679704" text-anchor="end">2</text><line x1="79.36231884057972" y1="62.26815642458101" x2="83.36231884057972" y2="62.26815642458101" stroke="var(--rule-2)"/><text class="lab-s" x="76.36231884057972" y="65.76815642458101" text-anchor="end">4</text><text class="lab-s" x="664" y="288.36499068901304" text-anchor="end">x</text><path d="M 47.07,243.67 L 49.43,244.06 L 51.79,244.44 L 54.15,244.81 L 56.51,245.17 L 58.87,245.52 L 61.23,245.86 L 63.58,246.18 L 65.94,246.50 L 68.30,246.81 L 70.66,247.10 L 73.02,247.39 L 75.38,247.66 L 77.74,247.92 L 80.10,248.17 L 82.46,248.42 L 84.81,248.65 L 87.17,248.87 L 89.53,249.08 L 91.89,249.28 L 94.25,249.46 L 96.61,249.64 L 98.97,249.81 L 101.33,249.96 L 103.68,250.11 L 106.04,250.24 L 108.40,250.37 L 110.76,250.48 L 113.12,250.58 L 115.48,250.68 L 117.84,250.76 L 120.20,250.83 L 122.56,250.89 L 124.91,250.94 L 127.27,250.98 L 129.63,251.00 L 131.99,251.02 L 134.35,251.03 L 136.71,251.02 L 139.07,251.01 L 141.43,250.98 L 143.78,250.95 L 146.14,250.90 L 148.50,250.84 L 150.86,250.77 L 153.22,250.69 L 155.58,250.60 L 157.94,250.50 L 160.30,250.39 L 162.66,250.27 L 165.01,250.14 L 167.37,249.99 L 169.73,249.84 L 172.09,249.67 L 174.45,249.50 L 176.81,249.31 L 179.17,249.12 L 181.53,248.91 L 183.89,248.69 L 186.24,248.46 L 188.60,248.22 L 190.96,247.97 L 193.32,247.71 L 195.68,247.44 L 198.04,247.16 L 200.40,246.86 L 202.76,246.56 L 205.11,246.25 L 207.47,245.92 L 209.83,245.59 L 212.19,245.24 L 214.55,244.88 L 216.91,244.51 L 219.27,244.14 L 221.63,243.75 L 223.99,243.35 L 226.34,242.94 L 228.70,242.51 L 231.06,242.08 L 233.42,241.64 L 235.78,241.19 L 238.14,240.72 L 240.50,240.25 L 242.86,239.76 L 245.22,239.27 L 247.57,238.76 L 249.93,238.24 L 252.29,237.71 L 254.65,237.17 L 257.01,236.62 L 259.37,236.06 L 261.73,235.49 L 264.09,234.91 L 266.44,234.32 L 268.80,233.72 L 271.16,233.10 L 273.52,232.48 L 275.88,231.84 L 278.24,231.20 L 280.60,230.54 L 282.96,229.87 L 285.32,229.19 L 287.67,228.51 L 290.03,227.81 L 292.39,227.10 L 294.75,226.38 L 297.11,225.64 L 299.47,224.90 L 301.83,224.15 L 304.19,223.39 L 306.54,222.61 L 308.90,221.83 L 311.26,221.03 L 313.62,220.23 L 315.98,219.41 L 318.34,218.58 L 320.70,217.74 L 323.06,216.89 L 325.42,216.03 L 327.77,215.16 L 330.13,214.28 L 332.49,213.39 L 334.85,212.49 L 337.21,211.57 L 339.57,210.65 L 341.93,209.72 L 344.29,208.77 L 346.65,207.81 L 349.00,206.85 L 351.36,205.87 L 353.72,204.88 L 356.08,203.88 L 358.44,202.87 L 360.80,201.85 L 363.16,200.82 L 365.52,199.78 L 367.87,198.73 L 370.23,197.67 L 372.59,196.59 L 374.95,195.51 L 377.31,194.41 L 379.67,193.31 L 382.03,192.19 L 384.39,191.07 L 386.75,189.93 L 389.10,188.78 L 391.46,187.62 L 393.82,186.45 L 396.18,185.27 L 398.54,184.08 L 400.90,182.88 L 403.26,181.66 L 405.62,180.44 L 407.98,179.21 L 410.33,177.96 L 412.69,176.71 L 415.05,175.44 L 417.41,174.16 L 419.77,172.88 L 422.13,171.58 L 424.49,170.27 L 426.85,168.95 L 429.20,167.62 L 431.56,166.28 L 433.92,164.93 L 436.28,163.57 L 438.64,162.19 L 441.00,160.81 L 443.36,159.41 L 445.72,158.01 L 448.08,156.59 L 450.43,155.17 L 452.79,153.73 L 455.15,152.28 L 457.51,150.82 L 459.87,149.35 L 462.23,147.87 L 464.59,146.38 L 466.95,144.88 L 469.30,143.37 L 471.66,141.85 L 474.02,140.31 L 476.38,138.77 L 478.74,137.22 L 481.10,135.65 L 483.46,134.07 L 485.82,132.49 L 488.18,130.89 L 490.53,129.28 L 492.89,127.66 L 495.25,126.03 L 497.61,124.39 L 499.97,122.74 L 502.33,121.08 L 504.69,119.41 L 507.05,117.72 L 509.41,116.03 L 511.76,114.33 L 514.12,112.61 L 516.48,110.89 L 518.84,109.15 L 521.20,107.40 L 523.56,105.64 L 525.92,103.88 L 528.28,102.10 L 530.63,100.31 L 532.99,98.51 L 535.35,96.69 L 537.71,94.87 L 540.07,93.04 L 542.43,91.20 L 544.79,89.34 L 547.15,87.48 L 549.51,85.60 L 551.86,83.72 L 554.22,81.82 L 556.58,79.91 L 558.94,77.99 L 561.30,76.06 L 563.66,74.12 L 566.02,72.17 L 568.38,70.21 L 570.74,68.24 L 573.09,66.26 L 575.45,64.26 L 577.81,62.26 L 580.17,60.25 L 582.53,58.22 L 584.89,56.19 L 587.25,54.14 L 589.61,52.08 L 591.96,50.01 L 594.32,47.93 L 596.68,45.85 L 599.04,43.75 L 601.40,41.63 L 603.76,39.51 L 606.12,37.38 L 608.48,35.24 L 610.84,33.08 L 613.19,30.92" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-b" x="609.57" y="55.68" text-anchor="end">φ (볼록)</text><path d="M 210.38,245.51 L 573.28,66.11" fill="none" stroke="var(--dim)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><circle cx="210.38" cy="245.51" r="3.6" fill="var(--dim)" stroke="#fff" stroke-width="1.2"/><circle cx="573.28" cy="66.11" r="3.6" fill="var(--dim)" stroke="#fff" stroke-width="1.2"/><text class="lab-s" x="364.61" y="137.44" text-anchor="middle" fill="var(--dim)">코드: φ의 위쪽</text><path d="M 183.16,290.60 L 609.57,79.80" fill="none" stroke="var(--struct)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><circle cx="391.83" cy="187.44" r="4.2" fill="var(--struct)" stroke="#fff" stroke-width="1.2"/><text class="lab-s" x="195.86" y="300.65" text-anchor="start" fill="var(--struct)">지지선: φ의 아래쪽</text><line x1="391.83" y1="187.44" x2="391.83" y2="266.36" stroke="var(--rule-2)" stroke-width="1.0" stroke-dasharray="3 3"/><text class="lab-s" x="47.07" y="31.65" text-anchor="start">φ(E[X]) ≤ E[φ(X)] — 지지선을 X 에 대해 평균내면 즉시 나옵니다</text></svg><figcaption><b>도표 0.1</b> &nbsp;볼록함수는 코드 아래, 지지선 위에 놓입니다. 코드를 쓰면 두 점 사이의 부등식이, 지지선을 쓰면 젠센 부등식이 곧바로 나옵니다.</figcaption></figure>
+
+<div class="env">
+<span class="env-label">정리 — 젠센 부등식</span>
+<p>\(\varphi\) 볼록, \(X\) 적분가능이면 \(\varphi(\mathbb E[X])\le\mathbb E[\varphi(X)]\).</p>
+</div>
+
+<div class="proof"><span class="ph">증명</span>
+<p>\(m=\mathbb E[X]\)에서 지지선을 잡으면 \(\varphi(X)\ge\varphi(m)+s(X-m)\).
+양변에 기댓값을 취하면 \(\mathbb E[\varphi(X)]\ge\varphi(m)+s\cdot0=\varphi(\mathbb E X)\).
+<span class="qed">∎</span></p></div>
+
+<div class="env note">
+<span class="env-label">본편에서의 쓰임</span>
+<p>깁스 부등식 \(\mathrm{KL}(p\|q)\ge0\)이 \(-\log\)의 볼록성에 젠센을 적용한 것입니다.
+그리고 그 부등식이 최대엔트로피 정리의 전부입니다.
+2층의 횔더·영 부등식도 같은 뿌리에서 나옵니다.</p>
+</div>
+
+<h2 id="s4"><span class="num">0.4</span>횔더 부등식</h2>
+
+<div class="env">
+<span class="env-label">정리</span>
+<p>\(\frac1p+\frac1q=1\ (p,q>1)\)에 대해 \(\mathbb E|XY|\le(\mathbb E|X|^p)^{1/p}(\mathbb E|Y|^q)^{1/q}\).
+\(p=q=2\)이면 코시–슈바르츠입니다.</p>
+</div>
+
+<div class="proof"><span class="ph">증명</span>
+<p>영의 부등식 \(ab\le\frac{a^p}{p}+\frac{b^q}{q}\)는 \(\log\)의 오목성(=젠센)에서 나옵니다.
+\(a=|X|/\|X\|_p\), \(b=|Y|/\|Y\|_q\)로 두고 기댓값을 취하면 우변이 \(\frac1p+\frac1q=1\)이 됩니다.
+<span class="qed">∎</span></p></div>
+
+<div class="env note">
+<span class="env-label">왜 본편에 필요한가</span>
+<p>지수족의 로그-분배함수 \(\psi(\theta)=\log\int h\,e^{\langle\theta,T\rangle}\)가
+<b>볼록</b>임을 보이는 가장 짧은 길이 횔더입니다.
+그 볼록성이 이후 모든 것을 떠받칩니다 — MLE의 유일성, 켤레 쌍대(2층), 이중평탄 구조(3층).</p>
+</div>
+
+<h2 id="s5"><span class="num">0.5</span>감마함수</h2>
+
+<div class="env def">
+<span class="env-label">정의와 성질</span>
+<p>\(\Gamma(z)=\int_0^\infty t^{z-1}e^{-t}dt\ (\mathrm{Re}\,z>0)\).
+\(\Gamma(z+1)=z\Gamma(z)\), \(\Gamma(n)=(n-1)!\), \(\Gamma(1/2)=\sqrt\pi\).</p>
+</div>
+
+<div class="proof"><span class="ph">\(\Gamma(1/2)=\sqrt\pi\)</span>
+<p>\(t=u^2/2\)로 치환하면 가우시안 적분 \(\int_0^\infty e^{-u^2/2}du=\sqrt{\pi/2}\)로 환원됩니다.
+<span class="qed">∎</span></p></div>
+
+<p>카이제곱·감마·카이·맥스웰–볼츠만의 정규화 상수가 모두 감마함수로 표현됩니다.
+반정수 인자 \(\Gamma(k/2)\)가 나오는 이유가 위 계산이며, \(n\)차원 구면의 표면적
+\(S_{n-1}=2\pi^{n/2}/\Gamma(n/2)\)에도 같은 함수가 등장합니다.</p>
+
+<h2 id="s6"><span class="num">0.6</span>MGF의 유일성 (진술)</h2>
+
+<div class="env">
+<span class="env-label">정리</span>
+<p>\(M_X(t)=M_Y(t)\)가 0을 포함하는 열린 구간에서 성립하면 \(X\)와 \(Y\)는 같은 분포를 갖습니다.</p>
+</div>
+
+<div class="env warn">
+<span class="env-label">가정이 필요합니다</span>
+<p>MGF가 0 근방에서 유한해야 합니다. 로그정규분포처럼 모든 적률이 유한한데도
+MGF가 발산하고 분포가 적률로 결정되지 않는 예가 존재합니다.
+언제나 존재하는 <b>특성함수</b> \(\varphi(t)=\mathbb E[e^{itX}]\)를 쓰면 이 문제가 사라지며,
+그 해석적 근거가 2층 <a href="complex-analysis.html">복소해석</a>입니다.</p>
+</div>
+
+<p>본편에서 이 정리는 "카이제곱의 MGF가 감마의 MGF와 같으므로 두 분포가 같다"는
+형태로 계보 유도의 각 단계를 매듭짓는 데 쓰입니다.</p>
+
+<h2 id="s7"><span class="num">0.7</span>변분 도함수</h2>
+
+<p>함수가 아니라 <b>함수 전체</b>에 대해 최적화할 때 필요한 도구입니다.
+범함수 \(J[p]=\int L(x,p(x))\,dx\)에 대해 섭동 \(p+\epsilon\eta\)를 넣고
+\(\frac{d}{d\epsilon}J[p+\epsilon\eta]\big|_{\epsilon=0}=0\)을 모든 \(\eta\)에 대해 요구하면</p>
+
+\[ \frac{\delta J}{\delta p}(x)=\frac{\partial L}{\partial p}(x,p(x))=0 \]
+
+<div class="env ex">
+<span class="env-label">최대엔트로피에서</span>
+<p>\(J[p]=-\int p\log p - \lambda_0(\int p-1)-\sum_k\lambda_k(\int T_k p-\mu_k)\)에 대해
+\(\frac{\delta J}{\delta p}=-\log p-1-\lambda_0-\sum_k\lambda_k T_k=0\),
+따라서 \(p(x)\propto\exp(-\sum_k\lambda_k T_k(x))\).
+<b>이 세 줄이 본편 4절의 전부</b>이며, 나머지는 이것을 엄밀하게 만드는 작업입니다.</p>
+</div>
+
+<div class="checkpoint">
+<span class="env-label">통과 기준</span>
+<ul>
+<li>지지선 보조정리로 젠센을 증명할 수 있습니다.</li>
+<li>횔더가 왜 로그-분배함수의 볼록성을 주는지 설명할 수 있습니다.</li>
+<li>\(\Gamma(1/2)=\sqrt\pi\)를 가우시안 적분으로 유도합니다.</li>
+<li>변분 도함수를 잡아 최대엔트로피 해가 지수 형태임을 세 줄로 씁니다.</li>
+</ul>
+</div>
+
+<h2 id="s8"><span class="num">0.8</span>참고 문헌</h2>
+<ul class="refs">
+<li>S. Abbott, <i>Understanding Analysis</i> — 지지선·볼록성 논의의 배경.</li>
+<li>G. Folland, <i>Real Analysis</i>, 2장 — 수렴 정리와 \(L^p\) 부등식의 표준 출처.</li>
+<li>E. Artin, <i>The Gamma Function</i> — 얇고 아름다운 소책자.</li>
+<li>I. Gelfand, S. Fomin, <i>Calculus of Variations</i> — 변분 도함수의 고전 입문서.</li>
+</ul>
+<nav class="flow"><a href="real-analysis-intro.html"><span class="dir">← 이전</span><span class="ttl">실해석 입문</span></a><a href="distributions.html"><span class="dir">다음 →</span><span class="ttl">분포의 계보와 최대엔트로피</span></a></nav>
+</main>
+</body>
+</html>
