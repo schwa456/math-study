@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>측도론 — 학습 자료</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)'],['$','$']],
+       displayMath:[['\\[','\\]'],['$$','$$']],
+       tags:'none', processEscapes:true},
+  svg:{fontCache:'global', scale:1.0},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="assets/tex-svg.js"></script>
+</head>
+<body>
+<header class="sheet-head"><div class="inner">
+  <div class="eyebrow"><span>학습 자료 웹 · <b>2층</b></span></div>
+  <h1>측도론</h1>
+  <p class="subtitle">외측도에서 조건부기대까지 — 마팅게일로 가는 다리</p>
+  <div class="section-view" aria-label="학습 자료 층 구조"><div class="floor done"><span class="lbl">1층</span><span>확률 기초 · 선형대수 · 다변수 미적분 · 실해석</span></div><div class="floor done"><span class="lbl">본편</span><span>프라이머 · 분포 계보 · 지수족 · MaxEnt</span></div><div class="floor here"><span class="lbl">2층</span><span>측도론 ←  측도론 · 복소해석 · 볼록최적화</span></div><div class="floor"><span class="lbl">3층</span><span>정보기하 · 변분추론</span></div></div>
+  <p class="subtitle" style="margin-top:.6rem"><a href="index.html">← 목차</a> &nbsp;·&nbsp; <a href="roadmap.html">학습 로드맵</a></p>
+</div></header>
+<main>
+<ul class="toc"><li><a href="#s1">2.1 왜 측도인가</a></li><li><a href="#s2">2.2 카라테오도리 구성</a></li><li><a href="#s3">2.3 적분의 3단 구성</a></li><li><a href="#s4">2.4 수렴 정리</a></li><li><a href="#s5">2.5 Lᵖ 공간</a></li><li><a href="#s6">2.6 푸비니–토넬리</a></li><li><a href="#s7">2.7 R–N · 조건부기대</a></li><li><a href="#s8">2.8 마팅게일로 가는 다리</a></li><li><a href="#s9">2.9 참고 문헌</a></li></ul>
+<div class="env note">
+<span class="env-label">이 문서의 자리</span>
+<p>1층 <b>실해석 입문</b>(수열·연속·리만 적분)과 기존 <b>측도론 프라이머</b>(σ-대수, MCT/DCT 진술)를 이미
+통과했다는 전제에서 시작합니다. 프라이머가 "증명을 읽기 위한 최소 어휘"였다면, 이 문서는
+<b>측도를 직접 구성하고 조건부기대까지 도달</b>하는 것이 목표입니다. 도착점은 명확합니다 —
+이론 트랙의 <b>마팅게일 집중부등식</b>을 자기 언어로 읽는 것입니다.</p>
+</div>
+
+<h2 id="s1"><span class="num">2.1</span>왜 측도를 새로 지어야 하는가</h2>
+
+<p>리만 적분은 세 지점에서 무너집니다.</p>
+
+<ul>
+<li><b>극한과 적분의 교환.</b> \(f_n \to f\) 각 점 수렴이어도 \(\int f_n \to \int f\)를 보장하는
+리만 쪽 정리는 조건이 지나치게 강합니다(균등수렴 요구). 확률론에서 다루는 수렴은 거의 언제나 그보다 약합니다.</li>
+<li><b>공간의 완비성.</b> 리만 적분 가능 함수들의 공간은 \(L^2\) 노름에 대해 완비가 아닙니다. 코시열의
+극한이 공간 밖으로 빠져나갑니다. 힐베르트 공간 논법 — 사영, 직교분해 — 을 쓸 수가 없습니다.</li>
+<li><b>확률이 곧 측도라는 사실.</b> \(P(A)\)는 "사건 \(A\)의 크기"입니다. 기댓값은 그 크기에 대한 적분입니다.
+확률론을 정직하게 쓰려면 '크기'의 공리부터 시작해야 합니다.</li>
+</ul>
+
+<p>차이의 핵심은 <b>자르는 방향</b>입니다.</p>
+
+<figure><svg viewBox="0 0 680 260" role="img" xmlns="http://www.w3.org/2000/svg"><rect x="49.42" y="119.61" width="34.96" height="91.84" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="84.38" y="105.70" width="34.96" height="105.76" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="119.33" y="97.26" width="34.96" height="114.19" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="154.29" y="91.92" width="34.96" height="119.54" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="189.24" y="88.90" width="34.96" height="122.56" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="224.20" y="87.83" width="34.96" height="123.62" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><rect x="259.15" y="88.52" width="34.96" height="122.94" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="0.8" opacity="1.0"/><path d="M 46.51,137.23 L 47.55,135.44 L 48.59,133.95 L 49.64,132.64 L 50.68,131.46 L 51.73,130.38 L 52.77,129.38 L 53.81,128.44 L 54.86,127.56 L 55.90,126.72 L 56.95,125.92 L 57.99,125.15 L 59.03,124.42 L 60.08,123.71 L 61.12,123.03 L 62.16,122.37 L 63.21,121.73 L 64.25,121.11 L 65.30,120.51 L 66.34,119.92 L 67.38,119.35 L 68.43,118.79 L 69.47,118.25 L 70.51,117.72 L 71.56,117.21 L 72.60,116.70 L 73.65,116.20 L 74.69,115.72 L 75.73,115.25 L 76.78,114.78 L 77.82,114.32 L 78.87,113.88 L 79.91,113.44 L 80.95,113.00 L 82.00,112.58 L 83.04,112.16 L 84.08,111.76 L 85.13,111.35 L 86.17,110.96 L 87.22,110.57 L 88.26,110.19 L 89.30,109.81 L 90.35,109.44 L 91.39,109.07 L 92.43,108.71 L 93.48,108.36 L 94.52,108.01 L 95.57,107.67 L 96.61,107.33 L 97.65,106.99 L 98.70,106.66 L 99.74,106.34 L 100.79,106.02 L 101.83,105.71 L 102.87,105.39 L 103.92,105.09 L 104.96,104.79 L 106.00,104.49 L 107.05,104.19 L 108.09,103.90 L 109.14,103.62 L 110.18,103.34 L 111.22,103.06 L 112.27,102.78 L 113.31,102.51 L 114.35,102.24 L 115.40,101.98 L 116.44,101.72 L 117.49,101.46 L 118.53,101.21 L 119.57,100.96 L 120.62,100.71 L 121.66,100.47 L 122.71,100.22 L 123.75,99.99 L 124.79,99.75 L 125.84,99.52 L 126.88,99.29 L 127.92,99.07 L 128.97,98.84 L 130.01,98.62 L 131.06,98.41 L 132.10,98.19 L 133.14,97.98 L 134.19,97.77 L 135.23,97.57 L 136.28,97.37 L 137.32,97.17 L 138.36,96.97 L 139.41,96.77 L 140.45,96.58 L 141.49,96.39 L 142.54,96.20 L 143.58,96.02 L 144.63,95.84 L 145.67,95.66 L 146.71,95.48 L 147.76,95.31 L 148.80,95.13 L 149.84,94.96 L 150.89,94.80 L 151.93,94.63 L 152.98,94.47 L 154.02,94.31 L 155.06,94.15 L 156.11,93.99 L 157.15,93.84 L 158.20,93.69 L 159.24,93.54 L 160.28,93.39 L 161.33,93.25 L 162.37,93.11 L 163.41,92.96 L 164.46,92.83 L 165.50,92.69 L 166.55,92.56 L 167.59,92.42 L 168.63,92.29 L 169.68,92.17 L 170.72,92.04 L 171.76,91.92 L 172.81,91.80 L 173.85,91.68 L 174.90,91.56 L 175.94,91.44 L 176.98,91.33 L 178.03,91.22 L 179.07,91.11 L 180.12,91.00 L 181.16,90.90 L 182.20,90.79 L 183.25,90.69 L 184.29,90.59 L 185.33,90.49 L 186.38,90.40 L 187.42,90.30 L 188.47,90.21 L 189.51,90.12 L 190.55,90.03 L 191.60,89.95 L 192.64,89.86 L 193.69,89.78 L 194.73,89.70 L 195.77,89.62 L 196.82,89.54 L 197.86,89.47 L 198.90,89.39 L 199.95,89.32 L 200.99,89.25 L 202.04,89.18 L 203.08,89.11 L 204.12,89.05 L 205.17,88.99 L 206.21,88.92 L 207.25,88.87 L 208.30,88.81 L 209.34,88.75 L 210.39,88.70 L 211.43,88.64 L 212.47,88.59 L 213.52,88.54 L 214.56,88.50 L 215.61,88.45 L 216.65,88.41 L 217.69,88.36 L 218.74,88.32 L 219.78,88.28 L 220.82,88.24 L 221.87,88.21 L 222.91,88.17 L 223.96,88.14 L 225.00,88.11 L 226.04,88.08 L 227.09,88.05 L 228.13,88.03 L 229.17,88.00 L 230.22,87.98 L 231.26,87.96 L 232.31,87.94 L 233.35,87.92 L 234.39,87.90 L 235.44,87.89 L 236.48,87.87 L 237.53,87.86 L 238.57,87.85 L 239.61,87.84 L 240.66,87.84 L 241.70,87.83 L 242.74,87.83 L 243.79,87.82 L 244.83,87.82 L 245.88,87.82 L 246.92,87.83 L 247.96,87.83 L 249.01,87.83 L 250.05,87.84 L 251.09,87.85 L 252.14,87.86 L 253.18,87.87 L 254.23,87.88 L 255.27,87.90 L 256.31,87.91 L 257.36,87.93 L 258.40,87.95 L 259.45,87.97 L 260.49,87.99 L 261.53,88.02 L 262.58,88.04 L 263.62,88.07 L 264.66,88.09 L 265.71,88.12 L 266.75,88.15 L 267.80,88.19 L 268.84,88.22 L 269.88,88.26 L 270.93,88.29 L 271.97,88.33 L 273.02,88.37 L 274.06,88.41 L 275.10,88.45 L 276.15,88.50 L 277.19,88.54 L 278.23,88.59 L 279.28,88.64 L 280.32,88.69 L 281.37,88.74 L 282.41,88.79 L 283.45,88.84 L 284.50,88.90 L 285.54,88.96 L 286.58,89.01 L 287.63,89.07 L 288.67,89.13 L 289.72,89.20 L 290.76,89.26 L 291.80,89.32 L 292.85,89.39 L 293.89,89.46 L 294.94,89.53 L 295.98,89.60 L 297.02,89.67" fill="none" stroke="var(--ink)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-b" x="170.79" y="42.32" text-anchor="middle">리만: 정의역을 세로로 자릅니다</text><text class="lab-s" x="170.79" y="224.81" text-anchor="middle">가로 분할 → 높이는 그때그때</text><rect x="403.83" y="159.53" width="252.46" height="25.96" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="0.8" opacity="0.85"/><rect x="403.83" y="133.56" width="252.46" height="25.96" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="0.8" opacity="0.85"/><rect x="408.88" y="107.60" width="247.41" height="25.96" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="0.8" opacity="0.85"/><rect x="456.85" y="81.64" width="199.44" height="25.96" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="0.8" opacity="0.85"/><path d="M 405.77,137.23 L 406.82,135.44 L 407.86,133.95 L 408.91,132.64 L 409.95,131.46 L 410.99,130.38 L 412.04,129.38 L 413.08,128.44 L 414.12,127.56 L 415.17,126.72 L 416.21,125.92 L 417.26,125.15 L 418.30,124.42 L 419.34,123.71 L 420.39,123.03 L 421.43,122.37 L 422.48,121.73 L 423.52,121.11 L 424.56,120.51 L 425.61,119.92 L 426.65,119.35 L 427.69,118.79 L 428.74,118.25 L 429.78,117.72 L 430.83,117.21 L 431.87,116.70 L 432.91,116.20 L 433.96,115.72 L 435.00,115.25 L 436.04,114.78 L 437.09,114.32 L 438.13,113.88 L 439.18,113.44 L 440.22,113.00 L 441.26,112.58 L 442.31,112.16 L 443.35,111.76 L 444.40,111.35 L 445.44,110.96 L 446.48,110.57 L 447.53,110.19 L 448.57,109.81 L 449.61,109.44 L 450.66,109.07 L 451.70,108.71 L 452.75,108.36 L 453.79,108.01 L 454.83,107.67 L 455.88,107.33 L 456.92,106.99 L 457.96,106.66 L 459.01,106.34 L 460.05,106.02 L 461.10,105.71 L 462.14,105.39 L 463.18,105.09 L 464.23,104.79 L 465.27,104.49 L 466.32,104.19 L 467.36,103.90 L 468.40,103.62 L 469.45,103.34 L 470.49,103.06 L 471.53,102.78 L 472.58,102.51 L 473.62,102.24 L 474.67,101.98 L 475.71,101.72 L 476.75,101.46 L 477.80,101.21 L 478.84,100.96 L 479.89,100.71 L 480.93,100.47 L 481.97,100.22 L 483.02,99.99 L 484.06,99.75 L 485.10,99.52 L 486.15,99.29 L 487.19,99.07 L 488.24,98.84 L 489.28,98.62 L 490.32,98.41 L 491.37,98.19 L 492.41,97.98 L 493.45,97.77 L 494.50,97.57 L 495.54,97.37 L 496.59,97.17 L 497.63,96.97 L 498.67,96.77 L 499.72,96.58 L 500.76,96.39 L 501.81,96.20 L 502.85,96.02 L 503.89,95.84 L 504.94,95.66 L 505.98,95.48 L 507.02,95.31 L 508.07,95.13 L 509.11,94.96 L 510.16,94.80 L 511.20,94.63 L 512.24,94.47 L 513.29,94.31 L 514.33,94.15 L 515.37,93.99 L 516.42,93.84 L 517.46,93.69 L 518.51,93.54 L 519.55,93.39 L 520.59,93.25 L 521.64,93.11 L 522.68,92.96 L 523.73,92.83 L 524.77,92.69 L 525.81,92.56 L 526.86,92.42 L 527.90,92.29 L 528.94,92.17 L 529.99,92.04 L 531.03,91.92 L 532.08,91.80 L 533.12,91.68 L 534.16,91.56 L 535.21,91.44 L 536.25,91.33 L 537.29,91.22 L 538.34,91.11 L 539.38,91.00 L 540.43,90.90 L 541.47,90.79 L 542.51,90.69 L 543.56,90.59 L 544.60,90.49 L 545.65,90.40 L 546.69,90.30 L 547.73,90.21 L 548.78,90.12 L 549.82,90.03 L 550.86,89.95 L 551.91,89.86 L 552.95,89.78 L 554.00,89.70 L 555.04,89.62 L 556.08,89.54 L 557.13,89.47 L 558.17,89.39 L 559.22,89.32 L 560.26,89.25 L 561.30,89.18 L 562.35,89.11 L 563.39,89.05 L 564.43,88.99 L 565.48,88.92 L 566.52,88.87 L 567.57,88.81 L 568.61,88.75 L 569.65,88.70 L 570.70,88.64 L 571.74,88.59 L 572.78,88.54 L 573.83,88.50 L 574.87,88.45 L 575.92,88.41 L 576.96,88.36 L 578.00,88.32 L 579.05,88.28 L 580.09,88.24 L 581.14,88.21 L 582.18,88.17 L 583.22,88.14 L 584.27,88.11 L 585.31,88.08 L 586.35,88.05 L 587.40,88.03 L 588.44,88.00 L 589.49,87.98 L 590.53,87.96 L 591.57,87.94 L 592.62,87.92 L 593.66,87.90 L 594.70,87.89 L 595.75,87.87 L 596.79,87.86 L 597.84,87.85 L 598.88,87.84 L 599.92,87.84 L 600.97,87.83 L 602.01,87.83 L 603.06,87.82 L 604.10,87.82 L 605.14,87.82 L 606.19,87.83 L 607.23,87.83 L 608.27,87.83 L 609.32,87.84 L 610.36,87.85 L 611.41,87.86 L 612.45,87.87 L 613.49,87.88 L 614.54,87.90 L 615.58,87.91 L 616.63,87.93 L 617.67,87.95 L 618.71,87.97 L 619.76,87.99 L 620.80,88.02 L 621.84,88.04 L 622.89,88.07 L 623.93,88.09 L 624.98,88.12 L 626.02,88.15 L 627.06,88.19 L 628.11,88.22 L 629.15,88.26 L 630.19,88.29 L 631.24,88.33 L 632.28,88.37 L 633.33,88.41 L 634.37,88.45 L 635.41,88.50 L 636.46,88.54 L 637.50,88.59 L 638.55,88.64 L 639.59,88.69 L 640.63,88.74 L 641.68,88.79 L 642.72,88.84 L 643.76,88.90 L 644.81,88.96 L 645.85,89.01 L 646.90,89.07 L 647.94,89.13 L 648.98,89.20 L 650.03,89.26 L 651.07,89.32 L 652.11,89.39 L 653.16,89.46 L 654.20,89.53 L 655.25,89.60 L 656.29,89.67" fill="none" stroke="var(--ink)" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-b" x="530.06" y="42.32" text-anchor="middle">르베그: 치역을 가로로 자릅니다</text><text class="lab-s" x="530.06" y="224.81" text-anchor="middle">각 띠의 '너비' = 준위집합의 측도</text><line x1="350.43" y1="218.87" x2="350.43" y2="37.13" stroke="var(--rule)" stroke-width="1.2" stroke-dasharray="3 4"/></svg><figcaption><b>도표 2.1</b> &nbsp;같은 함수를 세로로(리만) 자를 때와 가로로(르베그) 자를 때. 가로 자르기는 '준위집합의 크기'를 요구하고, 그 요구가 측도 개념을 낳습니다.</figcaption></figure>
+
+<p>가로로 자르면 각 띠의 기여는 (준위) × (그 준위를 넘는 집합의 크기)입니다. 여기서
+"집합의 크기"라는 개념이 독립적으로 필요해집니다 — 그것이 측도입니다.</p>
+
+<h2 id="s2"><span class="num">2.2</span>측도의 구성: 외측도와 카라테오도리</h2>
+
+<div class="env def">
+<span class="env-label">정의 — 측도</span>
+<p>집합 \(X\) 위의 σ-대수 \(\mathcal{F}\)에 대해 \(\mu:\mathcal{F}\to[0,\infty]\)가
+\(\mu(\varnothing)=0\)이고, 서로소인 \(\{A_n\}\)에 대해
+\(\mu\!\left(\bigcup_n A_n\right)=\sum_n \mu(A_n)\)(가산가법성)을 만족하면 <b>측도</b>라 합니다.
+\(\mu(X)=1\)이면 <b>확률측도</b>입니다.</p>
+</div>
+
+<p>문제는 존재성입니다. \(\mathbb{R}\) 위에 "길이"를 모든 부분집합에 부여할 수는 없습니다.
+그래서 <b>먼저 헐겁게 정의하고, 나중에 좋은 집합만 골라내는</b> 전략을 씁니다.</p>
+
+<div class="env def">
+<span class="env-label">정의 — 르베그 외측도</span>
+<p>\[\mu^*(A)\;=\;\inf\Big\{\sum_{k=1}^{\infty}(b_k-a_k)\;:\;A\subseteq\bigcup_k (a_k,b_k)\Big\}\]
+모든 \(A\subseteq\mathbb{R}\)에 정의되지만, 가법성이 깨집니다(열가법성만 성립).</p>
+</div>
+
+<div class="env">
+<span class="env-label">정리 — 카라테오도리 판정</span>
+<p>\(A\)가 <b>가측</b>이라 함은 모든 \(E\subseteq X\)에 대해
+\[\mu^*(E)=\mu^*(E\cap A)+\mu^*(E\cap A^c)\]
+가 성립하는 것입니다. 이런 \(A\)들의 모임 \(\mathcal{M}\)은 σ-대수이고, \(\mu^*|_{\mathcal{M}}\)은 측도입니다.</p>
+</div>
+
+<div class="proof"><span class="ph">증명의 뼈대</span>
+<p>(i) \(\mathcal{M}\)이 여집합에 닫힘은 정의가 대칭이므로 자명합니다.
+(ii) 유한 합집합에 닫힘은 \(E\)를 \(A\cup B\)의 네 조각으로 쪼개 판정식을 두 번 적용하면 나옵니다.
+(iii) 가산합집합은 유한 단계의 결과에 \(\mu^*\)의 열가법성과 단조수렴을 결합합니다.
+(iv) 서로소 \(A_n\)에 대해 \(E\)를 시험집합으로 두고 (ii)를 반복하면 가법성이 떨어집니다.
+<span class="qed">∎</span></p></div>
+
+<div class="env warn">
+<span class="env-label">함정 — 모든 집합이 가측일 수는 없습니다</span>
+<p>선택공리를 쓰면 <b>비탈리 집합</b>을 만들 수 있습니다. \([0,1)\)에서 \(x\sim y \iff x-y\in\mathbb{Q}\)로
+동치류를 만들고 각 류에서 대표를 하나씩 뽑아 \(V\)라 하면, \(V\)의 유리수 평행이동들은 서로소이고
+\([0,1)\)을 덮으며 \([0,2)\)에 담깁니다. \(\mu(V)=0\)이면 합이 0, \(>0\)이면 합이 \(\infty\) —
+\(1\le \cdot \le 2\)와 모순입니다. 그래서 σ-대수를 <b>제한</b>하는 것이 선택이 아니라 필연입니다.</p>
+</div>
+
+<h2 id="s3"><span class="num">2.3</span>가측함수와 적분의 3단 구성</h2>
+
+<p>적분은 세 계단으로 쌓아 올립니다. 이 구조를 몸에 익히면 이후 증명의 90%가 "단순함수로 내려가서 확인하고 극한으로 올린다"로 환원됩니다.</p>
+
+<ol>
+<li><b>단순함수</b> \(s=\sum_{i=1}^{n} a_i \mathbf{1}_{A_i}\) : \(\int s\,d\mu := \sum_i a_i\mu(A_i)\).</li>
+<li><b>비음 가측함수</b> \(f\ge 0\) : \(\int f\,d\mu := \sup\{\int s : 0\le s\le f,\ s\ \text{단순}\}\).
+임의의 \(f\ge0\)에 대해 \(s_n\uparrow f\)인 단순함수열이 존재합니다
+(\(s_n = \sum_{k=0}^{n2^n-1}\frac{k}{2^n}\mathbf 1_{\{k/2^n \le f < (k+1)/2^n\}} + n\mathbf 1_{\{f\ge n\}}\)).</li>
+<li><b>일반 함수</b> : \(f=f^+-f^-\)로 쪼개고 양쪽이 유한할 때 \(\int f = \int f^+ - \int f^-\).</li>
+</ol>
+
+<div class="env ex">
+<span class="env-label">예 — 디리클레 함수</span>
+<p>\(f=\mathbf{1}_{\mathbb{Q}\cap[0,1]}\)는 리만 적분이 불가능합니다(상적분 1, 하적분 0).
+르베그에서는 \(\mathbb{Q}\)가 가산집합이므로 \(\mu(\mathbb{Q})=0\), 따라서 \(\int f\,d\mu = 0\).
+"거의 어디서나(a.e.)"라는 어휘가 여기서 태어납니다.</p>
+</div>
+
+<h2 id="s4"><span class="num">2.4</span>세 수렴 정리</h2>
+
+<div class="env">
+<span class="env-label">정리 — 단조수렴정리 (MCT)</span>
+<p>\(0\le f_1\le f_2\le\cdots\), \(f_n\to f\) 점별이면 \(\displaystyle\int f_n\,d\mu \uparrow \int f\,d\mu\).</p>
+</div>
+
+<div class="proof"><span class="ph">증명</span>
+<p>\(\int f_n\)은 단조증가하므로 극한 \(L\le\int f\)가 존재합니다. 반대 방향: 단순함수 \(0\le s\le f\)와
+\(c\in(0,1)\)에 대해 \(E_n=\{f_n\ge cs\}\)로 두면 \(E_n\uparrow X\)이고
+\(\int f_n \ge \int_{E_n} cs = c\sum_i a_i\mu(A_i\cap E_n)\).
+측도의 아래로부터의 연속성으로 \(\mu(A_i\cap E_n)\uparrow\mu(A_i)\)이므로 \(L\ge c\int s\).
+\(c\uparrow1\), 이어서 \(s\)에 대한 상한을 취하면 \(L\ge\int f\). <span class="qed">∎</span></p></div>
+
+<div class="env">
+<span class="env-label">정리 — 파투 보조정리</span>
+<p>\(f_n\ge0\) 가측이면 \(\displaystyle\int \liminf_n f_n \le \liminf_n \int f_n\).</p>
+</div>
+
+<div class="proof"><span class="ph">증명</span>
+<p>\(g_n=\inf_{k\ge n} f_k\)로 두면 \(g_n\uparrow \liminf f_n\)이고 \(g_n \le f_k\ (k\ge n)\).
+MCT를 \(g_n\)에 적용하고 \(\int g_n \le \inf_{k\ge n}\int f_k\)를 결합합니다. <span class="qed">∎</span></p></div>
+
+<div class="env">
+<span class="env-label">정리 — 지배수렴정리 (DCT)</span>
+<p>\(f_n\to f\) a.e.이고 \(|f_n|\le g\) (모든 \(n\)), \(\int g\,d\mu<\infty\)이면
+\(\int f_n \to \int f\)이며 나아가 \(\int|f_n-f|\to0\).</p>
+</div>
+
+<div class="proof"><span class="ph">증명</span>
+<p>\(2g-|f_n-f|\ge0\)에 파투를 적용하면
+\(\int 2g \le \int 2g - \limsup\int|f_n-f|\), 즉 \(\limsup\int|f_n-f|\le0\). <span class="qed">∎</span></p></div>
+
+<p>지배함수 \(g\)가 왜 필요한지는 반례 하나로 충분합니다.</p>
+
+<figure><svg viewBox="0 0 680 250" role="img" xmlns="http://www.w3.org/2000/svg"><line x1="38" y1="196.6" x2="664" y2="196.6" stroke="var(--rule-2)"/><line x1="52.55813953488372" y1="22" x2="52.55813953488372" y2="216" stroke="var(--rule-2)"/><line x1="52.55813953488372" y1="196.6" x2="52.55813953488372" y2="200.6" stroke="var(--rule-2)"/><text class="lab-s" x="52.55813953488372" y="211.6" text-anchor="middle">0</text><line x1="198.13953488372093" y1="196.6" x2="198.13953488372093" y2="200.6" stroke="var(--rule-2)"/><text class="lab-s" x="198.13953488372093" y="211.6" text-anchor="middle">2</text><line x1="343.72093023255815" y1="196.6" x2="343.72093023255815" y2="200.6" stroke="var(--rule-2)"/><text class="lab-s" x="343.72093023255815" y="211.6" text-anchor="middle">4</text><line x1="489.3023255813954" y1="196.6" x2="489.3023255813954" y2="200.6" stroke="var(--rule-2)"/><text class="lab-s" x="489.3023255813954" y="211.6" text-anchor="middle">6</text><line x1="634.8837209302325" y1="196.6" x2="634.8837209302325" y2="200.6" stroke="var(--rule-2)"/><text class="lab-s" x="634.8837209302325" y="211.6" text-anchor="middle">8</text><line x1="48.55813953488372" y1="196.6" x2="52.55813953488372" y2="196.6" stroke="var(--rule-2)"/><text class="lab-s" x="45.55813953488372" y="200.1" text-anchor="end">0</text><line x1="48.55813953488372" y1="67.26666666666668" x2="52.55813953488372" y2="67.26666666666668" stroke="var(--rule-2)"/><text class="lab-s" x="45.55813953488372" y="70.76666666666668" text-anchor="end">1</text><text class="lab-s" x="664" y="218.6" text-anchor="end">x</text><path d="M 52.56,196.60 L 88.95,67.27 L 125.35,196.60 Z" fill="var(--struct)" stroke="none" stroke-width="1.0" opacity="0.13"/><path d="M 52.56,196.60 L 88.95,67.27 L 125.35,196.60" fill="none" stroke="var(--struct)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-s" x="88.95" y="55.63" text-anchor="middle">f<tspan dy='3' font-size='8'>1</tspan></text><path d="M 198.14,196.60 L 234.53,67.27 L 270.93,196.60 Z" fill="var(--dim)" stroke="none" stroke-width="1.0" opacity="0.13"/><path d="M 198.14,196.60 L 234.53,67.27 L 270.93,196.60" fill="none" stroke="var(--dim)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-s" x="234.53" y="55.63" text-anchor="middle">f<tspan dy='3' font-size='8'>2</tspan></text><path d="M 343.72,196.60 L 380.12,67.27 L 416.51,196.60 Z" fill="var(--warn)" stroke="none" stroke-width="1.0" opacity="0.13"/><path d="M 343.72,196.60 L 380.12,67.27 L 416.51,196.60" fill="none" stroke="var(--warn)" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" opacity="1.0"/><text class="lab-s" x="380.12" y="55.63" text-anchor="middle">f<tspan dy='3' font-size='8'>3</tspan></text><defs><marker id="ah26" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--ink-3)"/></marker></defs><line x1="503.86" y1="116.41" x2="642.16" y2="116.41" stroke="var(--ink-3)" stroke-width="1.3" marker-end="url(#ah26)" stroke-dasharray="4 4"/><text class="lab-s" x="569.37" y="103.48" text-anchor="middle">혹이 오른쪽으로 달아납니다</text><text class="lab-s" x="59.84" y="209.53" text-anchor="start">각 점에서 fₙ(x) → 0 이지만 ∫fₙ = 1/4 로 일정</text></svg><figcaption><b>도표 2.2</b> &nbsp;달아나는 혹. 각 점에서 fₙ(x)→0 이지만 적분은 1/4로 고정입니다. 공통 지배함수가 없으므로 DCT가 적용되지 않고, 파투 부등식은 0 ≤ 1/4로 참이되 등호는 성립하지 않습니다.</figcaption></figure>
+
+<div class="env note">
+<span class="env-label">연구 연결</span>
+<p>DCT는 "기댓값과 극한을 바꿔도 되는가"라는 질문의 표준 답입니다. 정책경사 정리에서
+\(\nabla_\theta \mathbb{E}_{\pi_\theta}[\cdot] = \mathbb{E}_{\pi_\theta}[\nabla_\theta \log\pi_\theta\,\cdot]\)로
+미분을 기댓값 안으로 넣는 단계가 바로 DCT(또는 그 미분 버전)의 적용입니다.
+지배 조건이 깨지면 그 항등식 자체가 성립하지 않습니다.</p>
+</div>
+
+<h2 id="s5"><span class="num">2.5</span>\(L^p\) 공간과 완비성</h2>
+
+<p>\(\|f\|_p=(\int|f|^p d\mu)^{1/p}\), \(L^p=\{f : \|f\|_p<\infty\}\) (a.e. 같으면 동일시).</p>
+
+<div class="env">
+<span class="env-label">정리 — 횔더 · 민코프스키</span>
+<p>\(\frac1p+\frac1q=1\)일 때 \(\|fg\|_1\le\|f\|_p\|g\|_q\), 그리고 \(\|f+g\|_p\le\|f\|_p+\|g\|_p\).</p>
+</div>
+
+<div class="proof"><span class="ph">증명 (횔더)</span>
+<p>영의 부등식 \(ab\le \frac{a^p}{p}+\frac{b^q}{q}\)(로그의 오목성 = 젠센)를
+\(a=|f|/\|f\|_p,\ b=|g|/\|g\|_q\)에 적용하고 적분합니다. 우변이 \(\frac1p+\frac1q=1\)로 정리됩니다.
+<span class="qed">∎</span></p></div>
+
+<div class="env">
+<span class="env-label">정리 — 리스–피셔</span>
+<p>\(1\le p\le\infty\)에 대해 \(L^p(\mu)\)는 완비, 즉 바나흐 공간입니다. 특히 \(L^2\)는 힐베르트 공간입니다.</p>
+</div>
+
+<div class="proof"><span class="ph">증명의 뼈대</span>
+<p>코시열에서 \(\|f_{n_{k+1}}-f_{n_k}\|_p\le2^{-k}\)인 부분열을 뽑고,
+\(g=\sum_k|f_{n_{k+1}}-f_{n_k}\!|\)에 MCT를 적용해 \(\|g\|_p<\infty\)를 얻습니다.
+그러면 급수가 a.e. 절대수렴하므로 극한 \(f\)가 존재하고, 파투로 \(\|f-f_n\|_p\to0\)을 봅니다.
+<span class="qed">∎</span></p></div>
+
+<div class="env note">
+<span class="env-label">이것이 왜 중요한가</span>
+<p>\(L^2\)가 힐베르트 공간이라는 사실이 다음 절 전체를 떠받칩니다.
+조건부기대는 <b>닫힌 부분공간으로의 직교사영</b>이고, 사영이 존재하려면 완비성이 필요합니다.</p>
+</div>
+
+<h2 id="s6"><span class="num">2.6</span>곱측도와 푸비니–토넬리</h2>
+
+<div class="env">
+<span class="env-label">정리 — 토넬리 / 푸비니</span>
+<p>σ-유한 측도공간 \((X,\mu),(Y,\nu)\)에서:
+<b>토넬리</b> — \(f\ge0\) 가측이면
+\(\int_{X\times Y} f\,d(\mu\otimes\nu)=\int_X\!\!\int_Y f\,d\nu\,d\mu=\int_Y\!\!\int_X f\,d\mu\,d\nu\).
+<b>푸비니</b> — \(f\in L^1(\mu\otimes\nu)\)이면 같은 결론이 성립합니다.</p>
+</div>
+
+<div class="env warn">
+<span class="env-label">함정</span>
+<p>\(f\)의 부호가 섞여 있고 절대적분 가능성을 확인하지 않으면 순서 교환이 틀립니다.
+실무 절차는 항상 <b>토넬리로 \(|f|\)의 이중적분이 유한함을 먼저 확인 → 그다음 푸비니</b>입니다.
+꼬리 확률 항등식 \(\mathbb{E}[X]=\int_0^\infty P(X>t)\,dt\) (\(X\ge0\))도 토넬리의 직접 응용입니다 —
+집중부등식 유도에서 반복적으로 쓰게 됩니다.</p>
+</div>
+
+<h2 id="s7"><span class="num">2.7</span>라돈–니코딤과 조건부기대</h2>
+
+<div class="env def">
+<span class="env-label">정의 — 절대연속</span>
+<p>\(\nu\ll\mu\) : \(\mu(A)=0 \Rightarrow \nu(A)=0\).</p>
+</div>
+
+<div class="env">
+<span class="env-label">정리 — 라돈–니코딤</span>
+<p>\(\mu,\nu\)가 σ-유한이고 \(\nu\ll\mu\)이면, \(\nu(A)=\int_A f\,d\mu\)인
+\(f\ge0\)가 a.e. 유일하게 존재합니다. 이를 \(f=\frac{d\nu}{d\mu}\)로 씁니다.</p>
+</div>
+
+<div class="env note">
+<span class="env-label">한 줄 요약</span>
+<p>"밀도함수"라는 개념의 정확한 정의가 이것입니다. 확률밀도 \(p(x)\)는
+\(P\)의 르베그 측도에 대한 라돈–니코딤 도함수이고, KL 발산
+\(\mathrm{KL}(P\|Q)=\int \log\frac{dP}{dQ}\,dP\)의 \(\frac{dP}{dQ}\)도 같은 대상입니다.
+\(P\not\ll Q\)이면 KL이 \(+\infty\)가 되는 이유가 여기서 드러납니다 — 변분추론에서 지지집합이
+어긋나면 목적함수가 폭발하는 그 현상입니다.</p>
+</div>
+
+<h3>조건부기대 — 두 가지 얼굴</h3>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>\(X\in L^1(\Omega,\mathcal F,P)\)와 부분 σ-대수 \(\mathcal G\subseteq\mathcal F\)에 대해,
+\(\mathbb{E}[X\mid\mathcal G]\)는 다음 두 조건을 만족하는 (a.s. 유일한) 확률변수입니다:
+(i) \(\mathcal G\)-가측, (ii) 모든 \(G\in\mathcal G\)에 대해 \(\int_G \mathbb{E}[X\mid\mathcal G]\,dP=\int_G X\,dP\).</p>
+</div>
+
+<p>존재성은 두 경로로 봅니다.</p>
+
+<ul>
+<li><b>라돈–니코딤 경로.</b> \(\nu(G)=\int_G X\,dP\)로 두면 \(\nu\ll P|_{\mathcal G}\)이므로
+\(\frac{d\nu}{dP|_{\mathcal G}}\)가 곧 조건부기대입니다.</li>
+<li><b>기하 경로 (\(X\in L^2\)).</b> \(L^2(\mathcal G)\)는 \(L^2(\mathcal F)\)의 닫힌 부분공간이므로
+직교사영 \(\Pi_{\mathcal G}\)가 존재하고 \(\mathbb{E}[X\mid\mathcal G]=\Pi_{\mathcal G}X\).
+즉 <b>\(\mathcal G\)가 아는 정보만으로 \(X\)를 가장 잘 근사한 것</b>입니다.</li>
+</ul>
+
+<div class="env">
+<span class="env-label">성질 (전부 쓰게 됩니다)</span>
+<p>선형성; 단조성; <b>타워 성질</b> \(\mathbb{E}[\mathbb{E}[X\mid\mathcal G]\mid\mathcal H]=\mathbb{E}[X\mid\mathcal H]\ (\mathcal H\subseteq\mathcal G)\);
+<b>끌어내기</b> \(\mathbb{E}[YX\mid\mathcal G]=Y\,\mathbb{E}[X\mid\mathcal G]\ (Y\ \mathcal G\text{-가측})\);
+조건부 젠센 \(\varphi(\mathbb{E}[X\mid\mathcal G])\le\mathbb{E}[\varphi(X)\mid\mathcal G]\ (\varphi\ \text{볼록})\).</p>
+</div>
+
+<h2 id="s8"><span class="num">2.8</span>필트레이션과 마팅게일 — 이론 트랙으로 가는 다리</h2>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>증가하는 σ-대수열 \(\mathcal F_0\subseteq\mathcal F_1\subseteq\cdots\)를 <b>필트레이션</b>,
+적응된 \(L^1\) 과정 \((M_n)\)이 \(\mathbb{E}[M_{n+1}\mid\mathcal F_n]=M_n\)을 만족하면 <b>마팅게일</b>이라 합니다.
+\(\le\)이면 슈퍼마팅게일, \(\ge\)이면 서브마팅게일입니다.</p>
+</div>
+
+<p>\(\mathcal F_n\)은 "시각 \(n\)까지 관측한 정보"입니다. 온라인 학습에서는
+\(\mathcal F_t = \sigma(\text{첫 } t \text{ 라운드의 질의·선택·피드백})\)이 그대로 필트레이션이 됩니다.</p>
+
+<div class="env">
+<span class="env-label">정리 — 도브 분해</span>
+<p>임의의 적응 \(L^1\) 과정 \(X_n\)은 \(X_n = M_n + A_n\)으로 유일하게 분해됩니다.
+여기서 \(M\)은 마팅게일, \(A\)는 예측가능(\(A_n\)이 \(\mathcal F_{n-1}\)-가측), \(A_0=0\).
+구체적으로 \(A_n=\sum_{k=1}^{n}\big(\mathbb{E}[X_k\mid\mathcal F_{k-1}]-X_{k-1}\big)\).</p>
+</div>
+
+<div class="env note">
+<span class="env-label">이것이 왜 결정적인가</span>
+<p>온라인 알고리즘의 누적 손실은 마팅게일이 아닙니다 — 알고리즘이 학습하면서 드리프트가 생기기 때문입니다.
+도브 분해는 그것을 <b>"예측가능한 드리프트 \(A_n\)" + "순수 잡음 \(M_n\)"</b>으로 갈라줍니다.
+후회 분석의 표준 전개가 정확히 이 형태입니다: 드리프트 항은 알고리즘 설계로 통제하고,
+잡음 항은 마팅게일 집중부등식(아주마–회프딩, 프리드먼)으로 통제합니다.
+비정상 환경의 <b>동적 후회</b>에서는 드리프트 항이 변동량 \(V_T\)로 나타납니다.</p>
+</div>
+
+<div class="env">
+<span class="env-label">정리 — 아주마–회프딩 (예고편)</span>
+<p>마팅게일 \((M_n)\)의 증분이 \(|M_k-M_{k-1}|\le c_k\)로 유계이면
+\[P\big(|M_n-M_0|\ge t\big)\;\le\;2\exp\!\Big(\frac{-t^2}{2\sum_{k=1}^n c_k^2}\Big).\]</p>
+</div>
+
+<p>증명은 조건부 MGF에 회프딩 보조정리를 적용하고 타워 성질로 재귀적으로 벗겨내는 구조입니다.
+그 <b>지수 모멘트 계산</b>이 다음 문서(복소해석)의 안장점 관점과, 그리고 볼록최적화의
+켤레함수와 정확히 같은 대상을 다른 각도에서 본 것입니다.</p>
+
+<div class="checkpoint">
+<span class="env-label">통과 기준</span>
+<ul>
+<li>단조수렴정리를 보지 않고 증명할 수 있습니다.</li>
+<li>DCT의 지배함수 가정이 왜 필요한지 반례로 설명할 수 있습니다.</li>
+<li>조건부기대를 사영으로 해석하고, 타워 성질을 그 언어로 설명할 수 있습니다.</li>
+<li>도브 분해를 써서 임의의 적응 과정을 드리프트 + 마팅게일로 쪼갤 수 있습니다.</li>
+<li>\(\mathbb{E}[X]=\int_0^\infty P(X>t)dt\)를 토넬리로 유도할 수 있습니다.</li>
+</ul>
+</div>
+
+<div class="env ex">
+<span class="env-label">연습 — 구현 과제</span>
+<p>NumPy로 \(f_n(x)=n\mathbf 1_{[0,1/n]}(x)\)와 \(g_n(x)=\frac1n\mathbf 1_{[0,n]}(x)\)의
+적분값을 수치적으로 계산하고, 두 경우 모두 점별로 0에 수렴하지만 적분 극한이 각각 1과 0임을 확인해 보십시오.
+어느 쪽이 DCT의 지배 조건을 만족하는지, 파투 부등식이 어느 쪽에서 등호를 놓치는지 따져 보면
+가정의 역할이 손에 잡힙니다.</p>
+</div>
+
+<div class="link-out">
+<span class="env-label">다음 문서로</span>
+<p>아주마 증명에서 등장한 \(\mathbb{E}[e^{\lambda X}]\) — 적률생성함수 — 는 해석함수입니다.
+그 해석적 구조를 이용해 꼬리 확률의 <b>정확한 지수율</b>을 뽑아내는 기법이 다음 문서의 안장점법입니다.</p>
+</div>
+
+<h2 id="s9"><span class="num">2.9</span>참고 문헌</h2>
+<ul class="refs">
+<li>G. Folland, <i>Real Analysis: Modern Techniques and Their Applications</i>, 2nd ed. — 1~3장이 이 문서의 정확한 범위입니다. 표준 참조서.</li>
+<li>R. Durrett, <i>Probability: Theory and Examples</i>, 5th ed. — 1장(측도), 4~5장(조건부기대·마팅게일). 확률 쪽으로 곧장 가려면 이쪽이 효율적입니다.</li>
+<li>D. Williams, <i>Probability with Martingales</i> — 마팅게일을 목표로 측도론을 압축한 구성. 이론 트랙 준비로는 가장 경로가 짧습니다.</li>
+<li>T. Tao, <i>An Introduction to Measure Theory</i> — 카라테오도리 구성을 가장 친절하게 다룹니다. 저자 웹페이지에 원고 공개.</li>
+<li>S. Boucheron, G. Lugosi, P. Massart, <i>Concentration Inequalities</i> — 2~3장이 아주마·프리드먼의 표준 출처입니다. 이론 트랙 본편에서 다시 만납니다.</li>
+</ul>
+<nav class="flow"><a href="distributions.html"><span class="dir">← 이전</span><span class="ttl">분포의 계보와 최대엔트로피</span></a><a href="complex-analysis.html"><span class="dir">다음 →</span><span class="ttl">복소해석</span></a></nav>
+</main>
+</body>
+</html>
