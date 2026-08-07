@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>선형대수 입문 — 학습 자료</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)'],['$','$']],
+       displayMath:[['\\[','\\]'],['$$','$$']],
+       tags:'none', processEscapes:true},
+  svg:{fontCache:'global', scale:1.0},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+</head>
+<body>
+<header class="sheet-head"><div class="inner">
+  <div class="eyebrow"><span>선형대수 · <b>초급</b></span></div>
+  <h1>선형대수 입문</h1>
+  <p class="subtitle">벡터 · 내적 · 행렬 · 연립방정식 — 데이터를 다루는 문법</p>
+  <div class="section-view" aria-label="난이도 구분"><div class="floor"><span class="lbl">고급</span><span>대학원 · 연구에 직접 쓰이는 도구</span></div><div class="floor"><span class="lbl">중급</span><span>학부 전공 수준 — 증명을 읽고 씁니다</span></div><div class="floor here"><span class="lbl">초급</span><span>선형대수 입문 ←  고등학교 수학까지만 안다고 가정합니다</span></div></div>
+  <p class="subtitle" style="margin-top:.6rem"><a href="index.html">← 목차</a> &nbsp;·&nbsp; <a href="roadmap.html">학습 로드맵</a></p>
+</div></header>
+<main>
+<ul class="toc"><li><a href="#s1">1 벡터</a></li><li><a href="#s2">2 내적</a></li><li><a href="#s3">3 행렬</a></li><li><a href="#s4">4 연립방정식</a></li><li><a href="#s5">5 행렬식·역행렬</a></li><li><a href="#s6">6 독립·기저·랭크</a></li><li><a href="#s7">7 고유값</a></li><li><a href="#s8">8 연습문제·해답</a></li><li><a href="#s9">9 더 읽을 것</a></li></ul>
+<div class="lesson">
+<h4>이 강의에 대하여</h4>
+<p class="meta"><b>선수 지식</b> · <a href="math-language.html">수학의 언어</a>.
+미적분은 필요 없습니다 — 이 문서는 독립적으로 읽을 수 있습니다.</p>
+<p class="meta"><b>이 문서의 관점</b> · 선형대수는 <b>여러 개의 수를 한 덩어리로 다루는 문법</b>입니다.
+데이터 한 줄이 벡터, 데이터 전체가 행렬, 데이터를 변환하는 일이 행렬 곱입니다.
+행렬 계산을 손으로 하는 훈련이 아니라 <b>무슨 일이 벌어지는지 보는 것</b>이 목표입니다.</p>
+<h4>학습 목표</h4>
+<ul>
+<li>벡터의 덧셈·스칼라배를 기하로 설명합니다.</li>
+<li>내적을 계산하고, 그것이 각도·길이·정사영과 어떻게 연결되는지 말합니다.</li>
+<li>행렬 곱을 "선형변환의 합성"으로 이해합니다.</li>
+<li>연립방정식을 가우스 소거로 풉니다.</li>
+<li>2×2 행렬의 행렬식·역행렬·고유값을 손으로 계산합니다.</li>
+</ul>
+<p class="meta"><b>예상 분량</b> · 읽기 4시간, 연습문제 포함 2일.</p>
+</div>
+
+<h2 id="s1"><span class="num">1</span>벡터</h2>
+
+<p>벡터는 수를 순서대로 늘어놓은 것입니다. \(\mathbf u=(2,3)\)은 평면 위의 한 점이자
+원점에서 그 점으로 향하는 화살표입니다.</p>
+
+<div class="env def">
+<span class="env-label">두 가지 연산</span>
+<p><b>덧셈</b> \((a_1,a_2)+(b_1,b_2)=(a_1+b_1,\,a_2+b_2)\) — 화살표를 이어 붙입니다.<br>
+<b>스칼라배</b> \(c(a_1,a_2)=(ca_1,ca_2)\) — 길이를 \(c\)배 늘립니다(\(c<0\)이면 방향도 뒤집힙니다).</p>
+</div>
+
+<figure><svg viewBox="0 0 680 310" role="img" xmlns="http://www.w3.org/2000/svg"><line x1="58.00" y1="240.71" x2="330.33" y2="240.71" stroke="var(--rule-2)" stroke-width="1.0"/><line x1="58.00" y1="240.71" x2="58.00" y2="51.53" stroke="var(--rule-2)" stroke-width="1.0"/><defs><marker id="ah2" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="58.00" y1="240.71" x2="222.67" y2="203.92" stroke="var(--struct)" stroke-width="2.0" marker-end="url(#ah2)"/><defs><marker id="ah4" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--dim)"/></marker></defs><line x1="58.00" y1="240.71" x2="115.00" y2="125.10" stroke="var(--dim)" stroke-width="2.0" marker-end="url(#ah4)"/><defs><marker id="ah6" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--warn)"/></marker></defs><line x1="58.00" y1="240.71" x2="279.67" y2="88.31" stroke="var(--warn)" stroke-width="2.2" marker-end="url(#ah6)"/><line x1="222.67" y1="203.92" x2="279.67" y2="88.31" stroke="var(--dim)" stroke-width="1.0" stroke-dasharray="3 3"/><line x1="115.00" y1="125.10" x2="279.67" y2="88.31" stroke="var(--struct)" stroke-width="1.0" stroke-dasharray="3 3"/><text class="lab-b" x="229.00" y="217.06" text-anchor="start" fill="var(--struct)">u</text><text class="lab-b" x="105.50" y="117.22" text-anchor="end" fill="var(--dim)">v</text><text class="lab-b" x="287.27" y="83.06" text-anchor="start" fill="var(--warn)">u + v</text><text class="lab-s" x="178.33" y="269.61" text-anchor="middle">덧셈: 이어 붙이기</text><line x1="400.00" y1="240.71" x2="653.33" y2="240.71" stroke="var(--rule-2)" stroke-width="1.0"/><line x1="400.00" y1="240.71" x2="400.00" y2="51.53" stroke="var(--rule-2)" stroke-width="1.0"/><defs><marker id="ah16" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--ink-3)"/></marker></defs><line x1="400.00" y1="240.71" x2="602.67" y2="211.80" stroke="var(--ink-3)" stroke-width="1.8" marker-end="url(#ah16)"/><defs><marker id="ah18" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--dim)"/></marker></defs><line x1="400.00" y1="240.71" x2="495.00" y2="114.59" stroke="var(--dim)" stroke-width="2.0" marker-end="url(#ah18)"/><defs><marker id="ah20" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="400.00" y1="240.71" x2="517.65" y2="223.93" stroke="var(--struct)" stroke-width="2.4" marker-end="url(#ah20)"/><line x1="495.00" y1="114.59" x2="517.65" y2="223.93" stroke="var(--rule-2)" stroke-width="1.2" stroke-dasharray="3 3"/><text class="lab-b" x="610.27" y="217.06" text-anchor="start">a</text><text class="lab-b" x="487.40" y="106.71" text-anchor="end" fill="var(--dim)">b</text><text class="lab-s" x="520.82" y="246.00" text-anchor="middle" fill="var(--struct)">b 의 a 방향 성분</text><text class="lab-s" x="526.67" y="269.61" text-anchor="middle">내적: 한 방향으로 얼마나 가는가</text></svg><figcaption><b>그림 3.1</b> &nbsp;왼쪽: 벡터 덧셈은 화살표를 이어 붙이는 것입니다. 오른쪽: 내적은 한 벡터가 다른 벡터 방향으로 드리우는 그림자의 길이와 관련됩니다.</figcaption></figure>
+
+<div class="env note">
+<span class="env-label">데이터가 벡터라는 말</span>
+<p>키 175cm, 몸무게 70kg, 나이 28인 사람은 \((175,70,28)\)이라는 3차원 벡터입니다.
+28×28 흑백 이미지는 784차원 벡터이고, 문장 하나를 임베딩하면 보통 수백 차원 벡터가 됩니다.
+차원이 커져도 <b>덧셈과 스칼라배의 규칙은 그대로</b>라는 것이 선형대수의 힘입니다.</p>
+</div>
+
+<h2 id="s2"><span class="num">2</span>내적 — 길이와 각도</h2>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>\[\mathbf a\cdot\mathbf b=\sum_i a_ib_i = a_1b_1+a_2b_2+\cdots\]
+길이(노름)는 \(\|\mathbf a\|=\sqrt{\mathbf a\cdot\mathbf a}\)이고,
+각도는 \(\cos\theta=\dfrac{\mathbf a\cdot\mathbf b}{\|\mathbf a\|\|\mathbf b\|}\)로 정의됩니다.</p>
+</div>
+
+<div class="env work">
+<span class="env-label">예제 1</span>
+<p>\(\mathbf a=(3,4)\), \(\mathbf b=(1,2)\)에 대해 내적, 각 벡터의 길이, 두 벡터가 이루는 각의 코사인을 구하십시오.</p>
+<ol class="steps">
+<li>내적: \(3\cdot1+4\cdot2=11\).</li>
+<li>길이: \(\|\mathbf a\|=\sqrt{9+16}=5\), \(\|\mathbf b\|=\sqrt{1+4}=\sqrt5\approx2.236\).</li>
+<li>\(\cos\theta=\dfrac{11}{5\sqrt5}\approx0.984\) — 거의 같은 방향입니다(\(\theta\approx10^\circ\)).</li>
+</ol>
+</div>
+
+<div class="env note">
+<span class="env-label">내적이 0이라는 것</span>
+<p>\(\cos\theta=0\), 즉 <b>직각</b>이라는 뜻입니다. 이것을 <b>직교</b>라 부릅니다.
+"서로 무관한 방향"이라는 직관이 여기서 나오고, 통계의 <b>무상관</b>,
+회귀분석의 <b>잔차가 설명변수와 직교</b>한다는 성질이 전부 이 개념입니다.</p>
+<p>그림 3.1 오른쪽이 <b>정사영</b>입니다. \(\mathbf b\)를 \(\mathbf a\) 방향으로 눌러 그림자를 만드는 것이고,
+그 길이가 \(\dfrac{\mathbf a\cdot\mathbf b}{\|\mathbf a\|}\)입니다.
+"내가 가진 정보로 설명되는 부분과 남는 부분"으로 나누는 모든 기법의 원형입니다.</p>
+</div>
+
+<h2 id="s3"><span class="num">3</span>행렬과 선형변환</h2>
+
+<p>행렬은 수를 직사각형으로 늘어놓은 것이지만, <b>의미는 함수</b>입니다.
+벡터를 넣으면 벡터가 나옵니다.</p>
+
+\[ \begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+=\begin{pmatrix}ax+by\\cx+dy\end{pmatrix} \]
+
+<figure><svg viewBox="0 0 680 320" role="img" xmlns="http://www.w3.org/2000/svg"><line x1="46.09" y1="281.96" x2="46.09" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="46.09" y1="281.96" x2="286.83" y2="281.96" stroke="var(--rule)" stroke-width="0.8"/><line x1="106.28" y1="281.96" x2="106.28" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="46.09" y1="228.50" x2="286.83" y2="228.50" stroke="var(--rule)" stroke-width="0.8"/><line x1="166.46" y1="281.96" x2="166.46" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="46.09" y1="175.04" x2="286.83" y2="175.04" stroke="var(--rule)" stroke-width="0.8"/><line x1="226.65" y1="281.96" x2="226.65" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="46.09" y1="121.58" x2="286.83" y2="121.58" stroke="var(--rule)" stroke-width="0.8"/><line x1="286.83" y1="281.96" x2="286.83" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="46.09" y1="68.12" x2="286.83" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><defs><marker id="ah10" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="166.46" y1="175.04" x2="226.65" y2="175.04" stroke="var(--struct)" stroke-width="2.0" marker-end="url(#ah10)"/><defs><marker id="ah12" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--dim)"/></marker></defs><line x1="166.46" y1="175.04" x2="166.46" y2="121.58" stroke="var(--dim)" stroke-width="2.0" marker-end="url(#ah12)"/><text class="lab-b" x="166.46" y="289.98" text-anchor="middle">원래 격자</text><line x1="250.72" y1="351.46" x2="467.39" y2="73.46" stroke="var(--rule)" stroke-width="0.8"/><line x1="250.72" y1="351.46" x2="491.46" y2="276.62" stroke="var(--rule)" stroke-width="0.8"/><line x1="310.91" y1="332.75" x2="527.57" y2="54.75" stroke="var(--rule)" stroke-width="0.8"/><line x1="304.89" y1="281.96" x2="545.63" y2="207.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="371.09" y1="314.04" x2="587.76" y2="36.04" stroke="var(--rule)" stroke-width="0.8"/><line x1="359.06" y1="212.46" x2="599.80" y2="137.62" stroke="var(--rule)" stroke-width="0.8"/><line x1="431.28" y1="295.33" x2="647.94" y2="17.33" stroke="var(--rule)" stroke-width="0.8"/><line x1="413.22" y1="142.96" x2="653.96" y2="68.12" stroke="var(--rule)" stroke-width="0.8"/><line x1="491.46" y1="276.62" x2="708.13" y2="-1.38" stroke="var(--rule)" stroke-width="0.8"/><line x1="467.39" y1="73.46" x2="708.13" y2="-1.38" stroke="var(--rule)" stroke-width="0.8"/><defs><marker id="ah25" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="479.43" y1="175.04" x2="539.61" y2="156.33" stroke="var(--struct)" stroke-width="2.0" marker-end="url(#ah25)"/><defs><marker id="ah27" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--dim)"/></marker></defs><line x1="479.43" y1="175.04" x2="533.59" y2="105.54" stroke="var(--dim)" stroke-width="2.0" marker-end="url(#ah27)"/><text class="lab-b" x="479.43" y="289.98" text-anchor="middle">A 를 적용한 격자</text><defs><marker id="ah30" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--ink-3)"/></marker></defs><line x1="328.96" y1="164.35" x2="407.20" y2="164.35" stroke="var(--ink-3)" stroke-width="1.6" marker-end="url(#ah30)"/><text class="lab-b" x="368.08" y="150.98" text-anchor="middle">A</text><text class="lab-s" x="19.01" y="28.02" text-anchor="start">행렬의 열이 곧 '기본 벡터가 어디로 가는가'입니다</text></svg><figcaption><b>그림 3.2</b> &nbsp;행렬은 격자 전체를 늘이고 기울입니다. 초록·주황 화살표가 각각 (1,0)과 (0,1)이 가는 곳이고, 그 두 벡터가 바로 행렬의 두 열입니다.</figcaption></figure>
+
+<div class="env note">
+<span class="env-label">행렬을 읽는 요령</span>
+<p>\(\begin{pmatrix}a&b\\c&d\end{pmatrix}\)의 <b>첫 번째 열 \((a,c)\)는 \((1,0)\)이 가는 곳</b>,
+<b>두 번째 열 \((b,d)\)는 \((0,1)\)이 가는 곳</b>입니다.
+숫자 네 개를 외우는 대신 "기본 화살표 두 개가 어디로 가는가"를 보면
+행렬이 무엇을 하는지 한눈에 들어옵니다.</p>
+</div>
+
+<div class="env work">
+<span class="env-label">예제 2 — 행렬 곱</span>
+<p>\(A=\begin{pmatrix}1&2\\0&1\end{pmatrix}\), \(B=\begin{pmatrix}3&0\\1&2\end{pmatrix}\)일 때 \(AB\)를 구하십시오.</p>
+<ol class="steps">
+<li>\(AB\)의 \((i,j)\) 성분은 <b>\(A\)의 \(i\)번째 행과 \(B\)의 \(j\)번째 열의 내적</b>입니다.</li>
+<li>(1,1): \((1,2)\cdot(3,1)=3+2=5\). &nbsp; (1,2): \((1,2)\cdot(0,2)=0+4=4\).</li>
+<li>(2,1): \((0,1)\cdot(3,1)=1\). &nbsp; (2,2): \((0,1)\cdot(0,2)=2\).</li>
+<li>\(AB=\begin{pmatrix}5&4\\1&2\end{pmatrix}\).</li>
+</ol>
+<p class="meta">행렬 곱은 <b>변환을 연달아 적용</b>하는 것입니다. \(AB\)는 "먼저 \(B\), 그다음 \(A\)"입니다.
+순서가 바뀌면 결과가 달라지므로 \(AB\ne BA\)가 보통입니다 — 직접 \(BA\)도 계산해 확인해 보십시오.</p>
+</div>
+
+<h2 id="s4"><span class="num">4</span>연립방정식과 가우스 소거</h2>
+
+<p>\(A\mathbf x=\mathbf b\)를 푸는 것이 연립방정식입니다.
+방법은 중학교에서 배운 가감법을 체계화한 것입니다.</p>
+
+<div class="env work">
+<span class="env-label">예제 3</span>
+<p>\(\begin{cases}2x+y=5\\ x+3y=10\end{cases}\)</p>
+<ol class="steps">
+<li>계수만 떼어 표로 씁니다: \(\left(\begin{array}{cc|c}2&1&5\\1&3&10\end{array}\right)\).</li>
+<li>1행을 2로 나눕니다: \(\left(\begin{array}{cc|c}1&0.5&2.5\\1&3&10\end{array}\right)\).</li>
+<li>2행에서 1행을 뺍니다: \(\left(\begin{array}{cc|c}1&0.5&2.5\\0&2.5&7.5\end{array}\right)\).</li>
+<li>2행을 2.5로 나누면 \(y=3\). 1행에 대입하면 \(x=2.5-0.5\cdot3=1\).</li>
+<li>답: \(x=1,\ y=3\). 원식에 넣어 검산합니다: \(2+3=5\) ✓, \(1+9=10\) ✓.</li>
+</ol>
+</div>
+
+<div class="env pitfall">
+<span class="env-label">해가 없거나 무수히 많은 경우</span>
+<p>소거 도중 \(0=5\) 같은 줄이 나오면 <b>해가 없습니다</b>(모순).
+\(0=0\)만 남으면 <b>해가 무수히 많습니다</b>(방정식이 서로 겹침).
+데이터 분석에서 "변수가 관측보다 많은" 상황이 후자에 해당하고,
+그래서 정규화 같은 추가 조건으로 하나를 고릅니다.</p>
+</div>
+
+<h2 id="s5"><span class="num">5</span>행렬식과 역행렬</h2>
+
+<div class="env def">
+<span class="env-label">2×2의 경우</span>
+<p>\(A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\)에 대해
+\[\det A = ad-bc,\qquad
+A^{-1}=\frac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}.\]</p>
+</div>
+
+<div class="env note">
+<span class="env-label">행렬식의 뜻</span>
+<p>\(|\det A|\)는 <b>넓이가 몇 배로 변하는가</b>입니다. 그림 3.2에서 정사각형 하나가
+평행사변형으로 바뀌는데, 그 넓이 비율이 행렬식입니다.
+부호가 음수이면 방향이 뒤집혔다는 뜻입니다.</p>
+<p>\(\det A=0\)이면 넓이가 0으로 찌부러졌다는 뜻이고, 이 경우 <b>되돌릴 수 없으므로</b>
+역행렬이 존재하지 않습니다. 이것이 "연립방정식의 해가 유일하지 않다"와 같은 이야기입니다.</p>
+</div>
+
+<div class="env work">
+<span class="env-label">예제 4</span>
+<p>\(A=\begin{pmatrix}2&1\\1&3\end{pmatrix}\)의 역행렬을 구하고, 예제 3을 다시 푸십시오.</p>
+<ol class="steps">
+<li>\(\det A=2\cdot3-1\cdot1=5\).</li>
+<li>\(A^{-1}=\dfrac15\begin{pmatrix}3&-1\\-1&2\end{pmatrix}\).</li>
+<li>\(\mathbf x=A^{-1}\mathbf b=\dfrac15\begin{pmatrix}3&-1\\-1&2\end{pmatrix}\begin{pmatrix}5\\10\end{pmatrix}
+=\dfrac15\begin{pmatrix}5\\15\end{pmatrix}=\begin{pmatrix}1\\3\end{pmatrix}\).</li>
+<li>예제 3과 같습니다.</li>
+</ol>
+<p class="meta">실무에서는 역행렬을 직접 구하지 않고 소거법으로 풉니다 — 훨씬 빠르고 수치적으로 안정적입니다.
+역행렬은 <b>이론을 서술할 때</b> 쓰는 표기라고 생각하십시오.</p>
+</div>
+
+<h2 id="s6"><span class="num">6</span>선형독립·기저·랭크</h2>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>벡터들이 <b>선형독립</b>이라 함은 어느 하나도 나머지의 조합으로 만들 수 없다는 뜻입니다.
+공간 전체를 만들어 내는 선형독립인 벡터들의 모임이 <b>기저</b>이고, 그 개수가 <b>차원</b>입니다.
+행렬의 <b>랭크</b>는 그 열들이 만드는 공간의 차원입니다.</p>
+</div>
+
+<div class="env ex">
+<span class="env-label">직관</span>
+<p>\((1,0)\)과 \((2,0)\)은 선형독립이 아닙니다 — 같은 직선 위에 있어 평면을 못 만듭니다.
+\((1,0)\)과 \((0,1)\)은 독립이고 평면 전체를 만듭니다.
+데이터에서 두 변수의 상관이 1이면 사실상 한 변수이고, 이때 랭크가 떨어져
+\(\det=0\)이 되며 회귀 계수가 유일하게 결정되지 않습니다 — <b>다중공선성</b>이라 부르는 현상입니다.</p>
+</div>
+
+<h2 id="s7"><span class="num">7</span>고유값과 고유벡터</h2>
+
+<div class="env def">
+<span class="env-label">정의</span>
+<p>\(A\mathbf v=\lambda\mathbf v\ (\mathbf v\ne\mathbf 0)\)를 만족하면
+\(\mathbf v\)는 <b>고유벡터</b>, \(\lambda\)는 <b>고유값</b>입니다.
+변환을 가해도 <b>방향이 바뀌지 않고 길이만 \(\lambda\)배</b> 되는 특별한 방향입니다.</p>
+</div>
+
+<div class="env work">
+<span class="env-label">예제 5</span>
+<p>\(A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\)의 고유값과 고유벡터를 구하십시오.</p>
+<ol class="steps">
+<li>\(A\mathbf v=\lambda\mathbf v\)를 \((A-\lambda I)\mathbf v=\mathbf 0\)로 옮깁니다.</li>
+<li>\(\mathbf v\ne\mathbf0\)인 해가 있으려면 \(\det(A-\lambda I)=0\)이어야 합니다(찌부러져야 0이 아닌 해가 생깁니다).</li>
+<li>\(\det\begin{pmatrix}2-\lambda&1\\1&2-\lambda\end{pmatrix}=(2-\lambda)^2-1=0\)
+\(\Rightarrow \lambda=1\) 또는 \(\lambda=3\).</li>
+<li>\(\lambda=3\): \((A-3I)\mathbf v=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}\mathbf v=0\Rightarrow v_1=v_2\).
+고유벡터 \((1,1)\).</li>
+<li>\(\lambda=1\): \(v_1=-v_2\)이므로 고유벡터 \((1,-1)\). 두 고유벡터가 서로 직교합니다.</li>
+</ol>
+<p class="meta">직교성은 우연이 아닙니다. \(A\)가 대칭행렬(\(a_{ij}=a_{ji}\))이면 항상 그렇고,
+그 사실이 <a href="linear-algebra.html">선형대수(중급)</a>의 스펙트럴 정리입니다.</p>
+</div>
+
+<div class="env note">
+<span class="env-label">어디에 쓰이는가</span>
+<p>데이터의 <b>주성분</b>이 공분산행렬의 고유벡터이고, 고유값이 그 방향의 분산입니다.
+그래프에서는 라플라시안의 고유값이 연결 구조를 알려 주고,
+최적화에서는 헤세 행렬의 고유값이 수렴 속도를 결정합니다.
+지금은 계산 절차만 익혀 두면 충분합니다.</p>
+</div>
+
+<h2 id="s8"><span class="num">8</span>연습문제</h2>
+
+<div class="checkpoint">
+<span class="env-label">직접 풀어 보십시오</span>
+<ol>
+<li>\(\mathbf a=(1,2,2)\)의 길이를 구하고, 길이가 1이 되도록 정규화하십시오.</li>
+<li>\(\mathbf a=(1,2)\), \(\mathbf b=(3,-1)\)의 내적을 구하고 직교 여부를 판단하십시오.</li>
+<li>\(A=\begin{pmatrix}1&2\\3&4\end{pmatrix}\), \(B=\begin{pmatrix}0&1\\1&0\end{pmatrix}\)에 대해 \(AB\)와 \(BA\)를 구하고 비교하십시오.</li>
+<li>\(\begin{cases}x+2y=4\\3x-y=5\end{cases}\)를 소거법으로 푸십시오.</li>
+<li>\(\begin{pmatrix}4&2\\2&1\end{pmatrix}\)의 행렬식을 구하고, 역행렬이 존재하는지 판단하십시오.</li>
+<li>\(\begin{pmatrix}3&0\\0&-1\end{pmatrix}\)의 고유값과 고유벡터를 구하십시오.</li>
+</ol>
+</div>
+
+<h3>해답</h3>
+<div class="qa"><p class="q">1.</p><p class="a">\(\|\mathbf a\|=\sqrt{1+4+4}=3\).
+정규화하면 \((1/3,\,2/3,\,2/3)\).</p></div>
+<div class="qa"><p class="q">2.</p><p class="a">\(1\cdot3+2\cdot(-1)=1\). 0이 아니므로 직교하지 않습니다.</p></div>
+<div class="qa"><p class="q">3.</p><p class="a">\(AB=\begin{pmatrix}2&1\\4&3\end{pmatrix}\),
+\(BA=\begin{pmatrix}3&4\\1&2\end{pmatrix}\). 서로 다릅니다 — 행렬 곱은 교환법칙이 성립하지 않습니다.
+\(B\)는 좌표를 뒤바꾸는 변환이고, 뒤바꾸기 전에 하느냐 후에 하느냐가 다르기 때문입니다.</p></div>
+<div class="qa"><p class="q">4.</p><p class="a">두 번째 식에 3을 곱한 첫 식을 빼면 \(-7y=-7\Rightarrow y=1\), 따라서 \(x=2\).</p></div>
+<div class="qa"><p class="q">5.</p><p class="a">\(\det=4\cdot1-2\cdot2=0\). 역행렬이 존재하지 않습니다.
+두 행이 서로 비례하기 때문이며(둘째 행 × 2 = 첫째 행), 랭크가 1입니다.</p></div>
+<div class="qa"><p class="q">6.</p><p class="a">대각행렬이므로 고유값이 대각 성분 그대로 \(3, -1\)이고,
+고유벡터는 \((1,0)\)과 \((0,1)\)입니다. 대각행렬은 각 축을 독립적으로 늘이거나 뒤집습니다.</p></div>
+
+<div class="env note">
+<span class="env-label">한 문장 요약</span>
+<p>벡터는 <b>데이터 한 덩어리</b>, 내적은 <b>방향의 유사도</b>, 행렬은 <b>공간을 바꾸는 함수</b>,
+고유벡터는 <b>그 변환이 건드리지 않는 방향</b>입니다.</p>
+</div>
+
+<div class="link-out">
+<span class="env-label">다음 문서로</span>
+<p><a href="probability-basics.html">확률·통계 입문</a>으로 갑니다.
+불확실한 것을 수로 다루는 법이고, 앞의 두 문서에서 배운 계산이 곧바로 쓰입니다.</p>
+</div>
+
+<h2 id="s9"><span class="num">9</span>더 읽을 것</h2>
+<ul class="refs">
+<li>3Blue1Brown, <i>Essence of Linear Algebra</i> — 그림 3.2와 같은 관점을 영상으로 풀어 놓았습니다. 강력히 권합니다.</li>
+<li>G. Strang, <i>Introduction to Linear Algebra</i> — 표준 교재. MIT 18.06 강의 영상과 함께.</li>
+<li>Khan Academy 선형대수 — 계산 연습용.</li>
+</ul>
+<nav class="flow"><a href="calculus-basics.html"><span class="dir">← 이전</span><span class="ttl">미적분 입문</span></a><a href="probability-basics.html"><span class="dir">다음 →</span><span class="ttl">확률·통계 입문</span></a></nav>
+</main>
+</body>
+</html>
