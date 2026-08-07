@@ -1,1 +1,207 @@
-# style
+
+:root{
+  --ink:#15201D; --ink-2:#41504B; --ink-3:#75837D;
+  --paper:#FAFAF6; --paper-2:#F1F2EC; --paper-3:#E7E9E1;
+  --rule:#D3D7CC; --rule-2:#BFC5B8;
+  --struct:#1F6F5C;          /* 구조선 — 정리·핵심 */
+  --struct-soft:#E3EFEA;
+  --dim:#9A6B00;             /* 치수선 — 예시·계산 */
+  --dim-soft:#F6EED9;
+  --warn:#A3341F;            /* 주의·함정 */
+  --warn-soft:#F7E7E2;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:"Pretendard","Pretendard Variable","Apple SD Gothic Neo","Noto Sans KR",
+         system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Iowan Old Style","Source Serif 4",Georgia,"Times New Roman",
+          "Nanum Myeongjo","Apple SD Gothic Neo",serif;
+  --maxw:46rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.78;
+  letter-spacing:-0.003em;
+  word-break:keep-all; overflow-wrap:anywhere;
+}
+
+/* ── 상단 도면 헤더 ───────────────────────────────── */
+.sheet-head{
+  border-bottom:1px solid var(--rule);
+  background:
+    linear-gradient(var(--paper-2),var(--paper-2));
+}
+.sheet-head .inner{max-width:var(--maxw);margin:0 auto;padding:1.6rem 1.15rem 1.35rem}
+.eyebrow{
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-3); display:flex; gap:.6rem; align-items:center;
+}
+.eyebrow b{color:var(--struct);font-weight:600}
+h1{
+  font-family:var(--serif); font-weight:600; font-size:1.92rem; line-height:1.28;
+  margin:.5rem 0 .35rem; letter-spacing:-0.02em;
+}
+.subtitle{color:var(--ink-2); font-size:.96rem; margin:0}
+
+/* ── 층 단면 인디케이터(시그니처) ─────────────────── */
+.section-view{
+  display:flex; flex-direction:column-reverse; gap:2px; margin:1.05rem 0 .2rem;
+  font-family:var(--mono); font-size:.66rem; letter-spacing:.04em;
+}
+.floor{
+  display:flex; align-items:center; gap:.55rem;
+  border:1px solid var(--rule); border-left:3px solid var(--rule-2);
+  background:var(--paper); color:var(--ink-3);
+  padding:.2rem .5rem;
+}
+.floor .lbl{min-width:2.4rem; color:var(--ink-3)}
+.floor.here{
+  border-left-color:var(--struct); background:var(--struct-soft);
+  color:var(--ink); font-weight:600;
+}
+.floor.done{border-left-color:var(--rule-2); background:var(--paper-2)}
+
+/* ── 본문 ─────────────────────────────────────────── */
+main{max-width:var(--maxw); margin:0 auto; padding:1.6rem 1.15rem 4rem}
+h2{
+  font-family:var(--serif); font-size:1.42rem; font-weight:600; line-height:1.35;
+  margin:2.8rem 0 .2rem; padding-top:1.1rem; border-top:1px solid var(--rule);
+  letter-spacing:-0.015em;
+}
+h2 .num{
+  font-family:var(--mono); font-size:.72rem; color:var(--struct);
+  display:block; letter-spacing:.14em; margin-bottom:.3rem; font-weight:600;
+}
+h3{font-size:1.06rem; font-weight:650; margin:1.9rem 0 .35rem; letter-spacing:-0.01em}
+p{margin:.7rem 0}
+a{color:var(--struct); text-underline-offset:3px}
+ul,ol{padding-left:1.15rem; margin:.7rem 0}
+li{margin:.3rem 0}
+strong{font-weight:650}
+code{font-family:var(--mono); font-size:.86em; background:var(--paper-3);
+     padding:.08em .34em; border-radius:2px}
+
+/* 목차 칩 */
+.toc{display:flex; flex-wrap:wrap; gap:.4rem; margin:1.5rem 0 .5rem; padding:0; list-style:none}
+.toc a{
+  display:inline-block; font-family:var(--mono); font-size:.74rem; letter-spacing:.02em;
+  border:1px solid var(--rule); background:var(--paper-2); color:var(--ink-2);
+  padding:.28rem .55rem; text-decoration:none; border-radius:2px;
+}
+.toc a:hover{border-color:var(--struct); color:var(--struct); background:var(--struct-soft)}
+
+/* 정리 환경 */
+.env{
+  border:1px solid var(--rule); border-left:3px solid var(--struct);
+  background:#fff; padding:.85rem 1rem; margin:1.15rem 0;
+}
+.env.def{border-left-color:var(--ink-2)}
+.env.ex{border-left-color:var(--dim); background:var(--dim-soft)}
+.env.note{border-left-color:var(--rule-2); background:var(--paper-2)}
+.env.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+.env-label{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--struct); font-weight:600; display:block; margin-bottom:.25rem;
+}
+.env.def .env-label{color:var(--ink-2)}
+.env.ex .env-label{color:var(--dim)}
+.env.note .env-label{color:var(--ink-3)}
+.env.warn .env-label{color:var(--warn)}
+.env p:first-of-type{margin-top:0}
+.env p:last-child{margin-bottom:0}
+
+.proof{margin:.9rem 0 1.2rem; padding-left:.85rem; border-left:1px dashed var(--rule-2);
+       color:var(--ink-2); font-size:.965rem}
+.proof .ph{font-family:var(--mono); font-size:.7rem; letter-spacing:.1em;
+           text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.2rem}
+.qed{float:right; color:var(--ink-3)}
+
+/* 표 */
+table{width:100%; border-collapse:collapse; margin:1.2rem 0; font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule); padding:.5rem .55rem; text-align:left; vertical-align:top}
+th{font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+   color:var(--ink-3); border-bottom:1px solid var(--rule-2); font-weight:600}
+tbody tr:nth-child(even){background:var(--paper-2)}
+.tw{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+/* 도표 */
+figure{margin:1.5rem 0; border:1px solid var(--rule); background:#fff; padding:.8rem .7rem .55rem}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:.82rem; color:var(--ink-2); margin-top:.5rem; line-height:1.6;
+           border-top:1px dotted var(--rule); padding-top:.45rem}
+figcaption b{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--struct)}
+
+/* 연결·체크포인트 */
+.link-out{
+  border:1px solid var(--struct); background:var(--struct-soft);
+  padding:.8rem 1rem; margin:1.4rem 0;
+}
+.link-out .env-label{color:var(--struct)}
+.checkpoint{border:1px dashed var(--rule-2); background:var(--paper-2); padding:.85rem 1rem; margin:1.4rem 0}
+.checkpoint ul{margin:.4rem 0 0}
+
+/* 하단 이동 */
+.flow{
+  display:flex; gap:.6rem; margin:3rem 0 0; padding-top:1.2rem;
+  border-top:1px solid var(--rule); flex-wrap:wrap;
+}
+.flow a{
+  flex:1 1 12rem; text-decoration:none; border:1px solid var(--rule);
+  background:var(--paper-2); padding:.6rem .75rem; color:var(--ink);
+}
+.flow a:hover{border-color:var(--struct); background:var(--struct-soft)}
+.flow .dir{display:block; font-family:var(--mono); font-size:.66rem; letter-spacing:.12em;
+           text-transform:uppercase; color:var(--ink-3); margin-bottom:.15rem}
+.flow .ttl{font-size:.92rem; font-weight:600}
+
+.refs{font-size:.9rem; color:var(--ink-2)}
+.refs li{margin:.42rem 0}
+
+/* 도표 내부 텍스트 */
+/* ── 목차 페이지 ─────────────────────────────────── */
+.cta{margin:1.6rem 0 2.2rem}
+.cta a{
+  display:inline-block; font-weight:650; font-size:1.02rem; text-decoration:none;
+  border:1px solid var(--struct); background:var(--struct-soft); color:var(--struct);
+  padding:.55rem .95rem;
+}
+.cta a:hover{background:var(--struct); color:var(--paper)}
+.cta-sub{display:block; margin-top:.5rem; font-size:.88rem; color:var(--ink-2)}
+.band{margin:2.4rem 0}
+.band-h{
+  font-family:var(--serif); font-size:1.12rem; font-weight:600; margin:0 0 .7rem;
+  padding-top:.9rem; border-top:1px solid var(--rule); display:flex; gap:.6rem;
+  align-items:baseline; color:var(--ink-2); letter-spacing:-0.01em;
+}
+.band-k{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; color:var(--struct);
+  border:1px solid var(--struct); background:var(--struct-soft);
+  padding:.1rem .4rem; font-weight:600; flex:none;
+}
+.doc-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.45rem}
+a.doc{
+  display:block; text-decoration:none; color:var(--ink);
+  border:1px solid var(--rule); border-left:3px solid var(--rule-2);
+  background:#fff; padding:.6rem .8rem;
+}
+a.doc:hover{border-left-color:var(--struct); background:var(--struct-soft)}
+.doc-t{display:block; font-weight:650; font-size:1rem; letter-spacing:-0.01em}
+.doc-d{display:block; font-size:.85rem; color:var(--ink-2); margin-top:.15rem; line-height:1.55}
+.foot{font-size:.85rem; color:var(--ink-3); margin-top:1rem}
+
+svg text{font-family:var(--sans)}
+svg .lab{font-size:11px; fill:var(--ink-2)}
+svg .lab-s{font-size:9.5px; fill:var(--ink-3)}
+svg .lab-b{font-size:11.5px; fill:var(--ink); font-weight:600}
+svg .node{font-size:12.5px; fill:var(--ink); font-weight:650}
+svg .node-s{font-size:10.5px; fill:var(--ink-3)}
+svg .node-h{font-size:11px; fill:var(--struct); font-weight:650; letter-spacing:.06em}
+
+@media (max-width:600px){
+  body{font-size:16px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.25rem}
+  main{padding:1.3rem .95rem 3rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+a:focus-visible,.toc a:focus-visible{outline:2px solid var(--struct); outline-offset:2px}
