@@ -18,221 +18,139 @@ window.MathJax={
 </head>
 <body>
 <header class="sheet-head"><div class="inner">
-  <div class="eyebrow"><span>전체 지형도 · <b>모든 층</b></span></div>
+  <div class="eyebrow"><span>전체 지도 · <b>모든 난이도</b></span></div>
   <h1>학습 로드맵</h1>
-  <p class="subtitle">네 트랙의 전체 지형도와 통과 순서</p>
-  <div class="section-view" aria-label="학습 자료 층 구조"><div class="floor"><span class="lbl">1층</span><span>확률 기초 · 선형대수 · 다변수 미적분 · 실해석</span></div><div class="floor"><span class="lbl">본편</span><span>프라이머 · 분포 계보 · 지수족 · MaxEnt</span></div><div class="floor"><span class="lbl">2층</span><span>측도론 · 복소해석 · 볼록최적화</span></div><div class="floor"><span class="lbl">3층</span><span>정보기하 · 변분추론</span></div></div>
+  <p class="subtitle">분야 × 난이도 지도와 통과 순서</p>
+  <div class="section-view" aria-label="난이도 구분"><div class="floor"><span class="lbl">고급</span><span>대학원 · 연구에 직접 쓰이는 도구</span></div><div class="floor"><span class="lbl">중급</span><span>학부 전공 수준 — 증명을 읽고 씁니다</span></div><div class="floor"><span class="lbl">초급</span><span>고등학교 수학까지만 안다고 가정합니다</span></div></div>
   <p class="subtitle" style="margin-top:.6rem"><a href="index.html">← 목차로</a></p>
 </div></header>
 <main>
-<ul class="toc"><li><a href="#s1">0 현재 상태</a></li><li><a href="#s2">1 지형도</a></li><li><a href="#s3">2 세 원칙</a></li><li><a href="#s4">3 단계별 경로</a></li><li><a href="#s5">4 문서 색인</a></li><li><a href="#s6">5 병행 트랙</a></li><li><a href="#s7">6 운용 방식</a></li></ul>
-<div class="env note">
-<span class="env-label">이 문서가 하는 일</span>
-<p>지금까지 만든 학습 자료가 네 갈래로 흩어져 있습니다. 이 문서는 그것들을
-<b>하나의 통과 순서</b>로 묶고, 각 단계의 진입 조건·통과 기준·다음 갈림길을 지정합니다.
+<ul class="toc"><li><a href="#s1">1 난이도의 뜻</a></li><li><a href="#s2">2 분야 × 난이도</a></li><li><a href="#s3">3 커리큘럼 순서</a></li><li><a href="#s4">4 목적별 지름길</a></li><li><a href="#s5">5 공부하는 방식</a></li></ul>
+<div class="lesson">
+<h4>이 문서가 하는 일</h4>
+<p class="meta">열여섯 편의 문서를 <b>분야</b>와 <b>난이도</b>로 나누고, 어느 순서로 통과할지 정합니다.
 새로 배울 내용은 없습니다. 무엇을 <b>언제</b> 할지에 대한 결정만 담겨 있습니다.</p>
+<p class="meta"><b>처음 오셨다면</b> 3절의 커리큘럼 순서를 그대로 따라가시면 됩니다.
+이미 아는 분야가 있다면 2절 격자에서 자기 위치를 찾아 시작하십시오.</p>
 </div>
 
-<h2 id="s1"><span class="num">0</span>현재 상태</h2>
+<h2 id="s1"><span class="num">1</span>난이도의 뜻</h2>
 
 <div class="tw">
 <table>
-<thead><tr><th>트랙</th><th>범위</th><th>자료 상태</th></tr></thead>
+<thead><tr><th>난이도</th><th>가정하는 것</th><th>읽는 방식</th></tr></thead>
 <tbody>
-<tr><td><b>① 이론 트랙</b></td><td>집중부등식·마팅게일 / 밴딧 / 서브모듈러 / 정책경사</td><td>분야별 자료 세트 제작 (2026-07)</td></tr>
-<tr><td><b>② 확률·통계</b> 1층</td><td><a href="prob-foundations.html">확률 기초</a> · <a href="linear-algebra.html">선형대수</a> · <a href="multivariable-calculus.html">다변수 미적분</a> · <a href="real-analysis-intro.html">실해석 입문</a></td><td>통합 재작성</td></tr>
-<tr><td>② 본편</td><td><a href="primer.html">프라이머</a> · <a href="distributions.html">분포 계보 · 지수족 · MaxEnt</a></td><td>통합 재작성</td></tr>
-<tr><td>② 2층</td><td>측도론 · 복소해석 · 볼록최적화</td><td>작성 완료</td></tr>
-<tr><td>② 3층</td><td>정보기하 · 변분추론</td><td>작성 완료</td></tr>
-<tr><td><b>③ 그래프 수학</b></td><td>스펙트럴 그래프 이론 · 호지 라플라시안 · 디리클레 에너지</td><td>HGAT 연구 과정에서 학습 완료</td></tr>
-<tr><td><b>④ 수리언어학</b></td><td>Phase 1–4 (집합론 → 대수 → 형식언어 → 몬터규)</td><td>완료 (2026-07)</td></tr>
+<tr><td><b>초급</b></td><td>고등학교 수학까지. 전공 지식 없음</td><td>정의 → 예제 → 풀이 → 연습문제. 종이와 펜으로 따라 씁니다</td></tr>
+<tr><td><b>중급</b></td><td>초급 내용. 증명을 읽을 준비가 된 상태</td><td>정리와 증명 중심. 계산보다 구조를 봅니다</td></tr>
+<tr><td><b>고급</b></td><td>중급 내용. 논문을 목표로 함</td><td>연구에서 실제로 쓰이는 도구. 통과 기준으로 자가 점검합니다</td></tr>
 </tbody>
 </table>
 </div>
 
-<h2 id="s2"><span class="num">1</span>지형도</h2>
-
-<figure><svg viewBox="0 0 560 760" role="img" xmlns="http://www.w3.org/2000/svg"><rect x="16.16" y="13.47" width="22.85" height="15.32" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="1.0" opacity="1.0"/><text class="node-s" x="49.89" y="18.94" text-anchor="start">완료</text><rect x="138.56" y="13.47" width="22.85" height="15.32" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.6" opacity="1.0"/><text class="node-s" x="172.29" y="18.94" text-anchor="start">이번 증축분</text><rect x="296.32" y="13.47" width="22.85" height="15.32" fill="#fff" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node-s" x="330.05" y="18.94" text-anchor="start">이론 트랙</text><rect x="421.44" y="13.47" width="22.85" height="15.32" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.6" opacity="1.0"/><text class="node-s" x="455.17" y="18.94" text-anchor="start">연구 목표</text><rect x="40.64" y="50.12" width="478.72" height="47.05" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="280.00" y="81.31" text-anchor="middle">1층 — 확률 기초 · 선형대수 · 다변수 미적분 · 실해석</text><rect x="40.64" y="129.45" width="478.72" height="47.05" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="280.00" y="160.63" text-anchor="middle">본편 — 프라이머 · 분포 계보 · 지수족 · MaxEnt</text><defs><marker id="ah12" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="280.00" y1="98.26" x2="280.00" y2="127.26" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah12)"/><rect x="21.60" y="207.68" width="163.20" height="49.24" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.8" opacity="1.0"/><text class="node" x="103.20" y="225.73" text-anchor="middle">측도론</text><text class="node-s" x="103.20" y="255.27" text-anchor="middle">조건부기대 · 마팅게일</text><rect x="209.28" y="207.68" width="141.44" height="49.24" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.8" opacity="1.0"/><text class="node" x="280.00" y="225.73" text-anchor="middle">복소해석</text><text class="node-s" x="280.00" y="255.27" text-anchor="middle">유수 · 안장점법</text><rect x="377.92" y="207.68" width="163.20" height="49.24" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.8" opacity="1.0"/><text class="node" x="459.52" y="225.73" text-anchor="middle">볼록최적화</text><text class="node-s" x="459.52" y="255.27" text-anchor="middle">켤레 · 미러 · 후회</text><defs><marker id="ah23" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="171.20" y1="177.59" x2="103.20" y2="204.94" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah23)"/><defs><marker id="ah25" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="280.00" y1="177.59" x2="280.00" y2="204.94" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah25)"/><defs><marker id="ah27" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="388.80" y1="177.59" x2="459.52" y2="204.94" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah27)"/><rect x="323.52" y="306.15" width="195.84" height="49.24" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.8" opacity="1.0"/><text class="node" x="421.44" y="324.20" text-anchor="middle">정보기하</text><text class="node-s" x="421.44" y="353.74" text-anchor="middle">이중평탄 · 자연경사</text><rect x="323.52" y="393.68" width="195.84" height="49.24" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.8" opacity="1.0"/><text class="node" x="421.44" y="411.73" text-anchor="middle">변분추론</text><text class="node-s" x="421.44" y="441.27" text-anchor="middle">ELBO · CAVI · SVI</text><defs><marker id="ah35" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="459.52" y1="259.65" x2="437.76" y2="303.41" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah35)"/><defs><marker id="ah37" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="421.44" y1="358.12" x2="421.44" y2="390.94" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah37)"/><rect x="65.12" y="306.15" width="201.28" height="49.24" fill="#fff" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="165.76" y="324.20" text-anchor="middle">집중부등식</text><text class="node-s" x="165.76" y="353.74" text-anchor="middle">마팅게일 · 아주마</text><rect x="65.12" y="393.68" width="201.28" height="49.24" fill="#fff" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="165.76" y="411.73" text-anchor="middle">밴딧 이론</text><text class="node-s" x="165.76" y="441.27" text-anchor="middle">UCB · 비정상 · 조합</text><rect x="65.12" y="481.21" width="201.28" height="49.24" fill="#fff" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="165.76" y="499.26" text-anchor="middle">서브모듈러</text><text class="node-s" x="165.76" y="528.80" text-anchor="middle">탐욕 · 로바즈 확장</text><rect x="323.52" y="481.21" width="195.84" height="49.24" fill="#fff" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="421.44" y="499.26" text-anchor="middle">정책경사</text><text class="node-s" x="421.44" y="528.80" text-anchor="middle">REINFORCE · NPG</text><defs><marker id="ah51" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="103.20" y1="259.65" x2="133.12" y2="303.41" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah51)"/><defs><marker id="ah53" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="263.68" y1="254.18" x2="203.84" y2="303.41" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah53)" stroke-dasharray="4 3"/><defs><marker id="ah55" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="165.76" y1="358.12" x2="165.76" y2="390.94" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah55)"/><defs><marker id="ah57" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="165.76" y1="445.65" x2="165.76" y2="478.47" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah57)"/><defs><marker id="ah59" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="421.44" y1="445.65" x2="421.44" y2="478.47" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah59)"/><path d="M 410.56,256.91 L 410.56,270.59 L 299.04,270.59 L 299.04,505.82" fill="none" stroke="var(--struct)" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" opacity="1.0" stroke-dasharray="4 3"/><defs><marker id="ah62" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="299.04" y1="418.29" x2="269.12" y2="418.29" stroke="var(--struct)" stroke-width="1.3" marker-end="url(#ah62)" stroke-dasharray="4 3"/><defs><marker id="ah64" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="299.04" y1="505.82" x2="269.12" y2="505.82" stroke="var(--struct)" stroke-width="1.3" marker-end="url(#ah64)" stroke-dasharray="4 3"/><defs><marker id="ah66" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--struct)"/></marker></defs><line x1="299.04" y1="330.76" x2="320.80" y2="330.76" stroke="var(--struct)" stroke-width="1.3" marker-end="url(#ah66)" stroke-dasharray="4 3"/><text class="node-s" x="290.88" y="306.15" text-anchor="end">볼록최적화</text><rect x="46.08" y="574.21" width="467.84" height="60.18" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.8" opacity="1.0"/><text class="node" x="280.00" y="597.73" text-anchor="middle">동적 후회 분석 · 국소 리셋</text><text class="node-s" x="280.00" y="627.27" text-anchor="middle">KG 리트리버 이론 트랙 — 연구 목표</text><defs><marker id="ah72" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="165.76" y1="533.18" x2="214.72" y2="568.74" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah72)"/><defs><marker id="ah74" markerWidth="7" markerHeight="7" refX="6" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 z" fill="var(--rule-2)"/></marker></defs><line x1="421.44" y1="533.18" x2="356.16" y2="568.74" stroke="var(--rule-2)" stroke-width="1.3" marker-end="url(#ah74)"/><rect x="40.64" y="678.15" width="217.60" height="54.71" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="149.44" y="698.94" text-anchor="middle">그래프 수학</text><text class="node-s" x="149.44" y="728.48" text-anchor="middle">스펙트럴 · 호지 라플라시안</text><rect x="301.76" y="678.15" width="217.60" height="54.71" fill="var(--paper-3)" stroke="var(--rule-2)" stroke-width="1.1" opacity="1.0"/><text class="node" x="410.56" y="698.94" text-anchor="middle">수리언어학</text><text class="node-s" x="410.56" y="728.48" text-anchor="middle">Phase 1–4 · DisCoCat 분기</text><text class="node-s" x="280.00" y="656.26" text-anchor="middle">아래 둘은 독립 병행 — 위 경로를 막지 않습니다</text></svg><figcaption><b>도면 0.1</b> &nbsp;학습 경로의 의존 구조. 실선은 필수 선행, 점선은 보조 관계입니다. 볼록최적화에서 세 갈래가 뻗어 나가는 것이 이 그림의 요점입니다.</figcaption></figure>
-
-<p>실선은 필수 선행, 점선은 "있으면 훨씬 수월한" 관계입니다.
-그림에서 읽어야 할 것은 세 가지입니다.</p>
-
-<ul>
-<li><b>볼록최적화가 병목입니다.</b> 세 갈래(밴딧 · 서브모듈러 · 정보기하)가 모두 여기서 뻗어 나갑니다.
-2층에서 가장 먼저 처리할 문서입니다.</li>
-<li><b>측도론은 집중부등식으로 가는 유일한 실선 경로</b>입니다. 다만 필요한 것은 측도론 전부가 아니라
-조건부기대와 도브 분해까지입니다.</li>
-<li><b>③·④ 트랙은 위 경로를 막지 않습니다.</b> 이미 완료된 자산이고, 이론 트랙 진행 중에는
-새로 시간을 배분하지 않아도 됩니다.</li>
-</ul>
-
-<h2 id="s3"><span class="num">2</span>순서를 정하는 세 원칙</h2>
-
-<div class="env">
-<span class="env-label">원칙 1 — 목적지에서 거꾸로 짚습니다</span>
-<p>목표는 "수학을 다 아는 것"이 아니라 <b>동적 후회 정리를 스스로 쓰고 증명하는 것</b>입니다.
-따라서 정리의 증명에 실제로 등장하는 도구만 선행으로 잡습니다.
-측도론에서 라돈–니코딤은 필요하지만 리스 표현정리는 지금 필요하지 않고,
-복소해석에서 유수 정리는 필요하지만 등각사상은 필요하지 않습니다.
-각 문서의 <b>통과 기준</b> 목록이 그 경계선입니다.</p>
+<div class="env note">
+<span class="env-label">초급 문서에 들어 있는 것</span>
+<p>학습 목표, 예상 분량, 단계별로 번호가 매겨진 <b>풀이 과정</b>, 자주 하는 실수,
+연습문제와 <b>해답</b>, 그리고 한 문장 요약이 모두 포함되어 있습니다.
+혼자 진도를 나갈 수 있도록 만든 강의 자료입니다.</p>
 </div>
 
-<div class="env">
-<span class="env-label">원칙 2 — 도구는 쓰기 직전에 집습니다</span>
-<p>선행 지식을 전부 쌓고 본론에 들어가는 방식은 거의 실패합니다.
-동기가 유지되지 않고, 어차피 나중에 다시 봐야 하기 때문입니다.
-그래서 아래 경로는 <b>2층 세 문서를 다 끝내고 이론 트랙에 들어가는 구성이 아니라</b>,
-볼록최적화를 마치는 즉시 밴딧으로 넘어가고 측도론은 집중부등식 직전에 붙이는 구성입니다.</p>
+<h2 id="s2"><span class="num">2</span>분야 × 난이도 격자</h2>
+
+<figure><svg viewBox="0 0 680 560" role="img" xmlns="http://www.w3.org/2000/svg"><rect x="157.88" y="10.15" width="161.54" height="35.29" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.4" opacity="1.0"/><text class="node" x="238.64" y="23.44" text-anchor="middle">초급</text><text class="node-s" x="238.64" y="39.21" text-anchor="middle">고등 수학까지</text><rect x="326.98" y="10.15" width="161.54" height="35.29" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.4" opacity="1.0"/><text class="node" x="407.75" y="23.44" text-anchor="middle">중급</text><text class="node-s" x="407.75" y="39.21" text-anchor="middle">학부 전공</text><rect x="496.08" y="10.15" width="161.54" height="35.29" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.4" opacity="1.0"/><text class="node" x="576.85" y="23.44" text-anchor="middle">고급</text><text class="node-s" x="576.85" y="39.21" text-anchor="middle">대학원·연구</text><rect x="9.78" y="56.65" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="93.80" text-anchor="middle">수학의 언어</text><rect x="160.40" y="62.88" width="156.50" height="54.38" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.3" opacity="1.0"/><text class="node" x="238.64" y="95.88" text-anchor="middle">수학의 언어</text><text class="node-s" x="407.75" y="92.97" text-anchor="middle">—</text><text class="node-s" x="576.85" y="92.97" text-anchor="middle">—</text><rect x="9.78" y="129.30" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="166.46" text-anchor="middle">선형대수</text><rect x="160.40" y="135.53" width="156.50" height="54.38" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.3" opacity="1.0"/><text class="node" x="238.64" y="168.53" text-anchor="middle">선형대수 입문</text><rect x="329.50" y="135.53" width="156.50" height="54.38" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.3" opacity="1.0"/><text class="node" x="407.75" y="168.53" text-anchor="middle">선형대수</text><text class="node-s" x="576.85" y="165.63" text-anchor="middle">—</text><rect x="9.78" y="201.95" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="239.11" text-anchor="middle">미적분·해석학</text><rect x="160.40" y="208.18" width="156.50" height="54.38" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.3" opacity="1.0"/><text class="node" x="238.64" y="241.18" text-anchor="middle">미적분 입문</text><rect x="329.50" y="208.18" width="156.50" height="25.12" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.3" opacity="1.0"/><text class="node" x="407.75" y="226.55" text-anchor="middle">다변수 미적분</text><rect x="329.50" y="237.45" width="156.50" height="25.12" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.3" opacity="1.0"/><text class="node" x="407.75" y="255.82" text-anchor="middle">해석학 입문</text><rect x="498.60" y="208.18" width="156.50" height="25.12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="226.55" text-anchor="middle">측도론</text><rect x="498.60" y="237.45" width="156.50" height="25.12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="255.82" text-anchor="middle">복소해석</text><rect x="9.78" y="274.60" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="311.76" text-anchor="middle">확률·통계</text><rect x="160.40" y="280.83" width="156.50" height="54.38" fill="var(--struct-soft)" stroke="var(--struct)" stroke-width="1.3" opacity="1.0"/><text class="node" x="238.64" y="313.83" text-anchor="middle">확률·통계 입문</text><rect x="329.50" y="280.83" width="156.50" height="25.12" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.3" opacity="1.0"/><text class="node" x="407.75" y="299.20" text-anchor="middle">확률론 기초</text><rect x="329.50" y="310.10" width="156.50" height="25.12" fill="var(--dim-soft)" stroke="var(--dim)" stroke-width="1.3" opacity="1.0"/><text class="node" x="407.75" y="328.47" text-anchor="middle">프라이머</text><rect x="498.60" y="280.83" width="156.50" height="54.38" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="313.83" text-anchor="middle">분포 계보</text><rect x="9.78" y="347.25" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="384.41" text-anchor="middle">최적화</text><text class="node-s" x="238.64" y="383.58" text-anchor="middle">—</text><text class="node-s" x="407.75" y="383.58" text-anchor="middle">—</text><rect x="498.60" y="353.48" width="156.50" height="54.38" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="386.49" text-anchor="middle">볼록최적화</text><rect x="9.78" y="419.91" width="140.53" height="62.69" fill="var(--paper-2)" stroke="var(--rule)" stroke-width="1.0" opacity="1.0"/><text class="node" x="80.05" y="457.06" text-anchor="middle">정보이론·기하</text><text class="node-s" x="238.64" y="456.23" text-anchor="middle">—</text><text class="node-s" x="407.75" y="456.23" text-anchor="middle">—</text><rect x="498.60" y="426.13" width="156.50" height="25.12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="444.50" text-anchor="middle">정보기하</text><rect x="498.60" y="455.40" width="156.50" height="25.12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.3" opacity="1.0"/><text class="node" x="576.85" y="473.77" text-anchor="middle">변분추론</text><text class="node-s" x="9.78" y="537.39" text-anchor="start">각 칸이 문서 한 편입니다. 왼쪽에서 오른쪽으로, 위에서 아래로 읽습니다.</text></svg><figcaption><b>지도 0.1</b> &nbsp;가로는 난이도, 세로는 분야입니다. 빈 칸(—)은 그 조합의 문서가 없다는 뜻이며, 최적화와 정보기하는 앞선 분야를 전제하므로 고급에만 있습니다.</figcaption></figure>
+
+<div class="tw">
+<table>
+<thead><tr><th>분야</th><th>초급</th><th>중급</th><th>고급</th></tr></thead>
+<tbody>
+<tr><td>수학의 언어</td><td><a href="math-language.html">수학의 언어</a></td><td>—</td><td>—</td></tr>
+<tr><td>선형대수</td><td><a href="linear-algebra-basics.html">선형대수 입문</a></td>
+    <td><a href="linear-algebra.html">선형대수</a></td><td>—</td></tr>
+<tr><td>미적분·해석학</td><td><a href="calculus-basics.html">미적분 입문</a></td>
+    <td><a href="multivariable-calculus.html">다변수 미적분</a><br><a href="real-analysis-intro.html">해석학 입문</a></td>
+    <td><a href="measure-theory.html">측도론</a><br><a href="complex-analysis.html">복소해석</a></td></tr>
+<tr><td>확률·통계</td><td><a href="probability-basics.html">확률·통계 입문</a></td>
+    <td><a href="prob-foundations.html">확률론 기초</a><br><a href="primer.html">측도·해석 프라이머</a></td>
+    <td><a href="distributions.html">분포의 계보와 최대엔트로피</a></td></tr>
+<tr><td>최적화</td><td>—</td><td>—</td><td><a href="convex-optimization.html">볼록최적화</a></td></tr>
+<tr><td>정보이론·기하</td><td>—</td><td>—</td>
+    <td><a href="information-geometry.html">정보기하</a><br><a href="variational-inference.html">변분추론</a></td></tr>
+</tbody>
+</table>
 </div>
 
-<div class="env">
-<span class="env-label">원칙 3 — 동시에 여는 문서는 둘까지</span>
-<p>하나는 '이론'(읽고 증명), 하나는 '적용'(구현·연구 문서 작성).
-셋 이상을 병행하면 어느 것도 통과 기준에 닿지 못합니다.
-③·④ 트랙은 이 정원에서 제외합니다 — 이미 끝났거나, 여유가 있을 때 읽는 자료입니다.</p>
+<h2 id="s3"><span class="num">3</span>커리큘럼 순서</h2>
+
+<p>아무 배경 없이 시작한다면 이 순서를 그대로 따르십시오.
+각 문서는 앞 문서에서 정한 어휘만 사용합니다.</p>
+
+<div class="tw">
+<table>
+<thead><tr><th>#</th><th>문서</th><th>왜 여기인가</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><a href="math-language.html">수학의 언어</a></td><td>기호를 못 읽으면 어느 문서도 시작할 수 없습니다</td></tr>
+<tr><td>2</td><td><a href="calculus-basics.html">미적분 입문</a></td><td>변화율과 누적 — 이후 모든 계산의 바탕</td></tr>
+<tr><td>3</td><td><a href="linear-algebra-basics.html">선형대수 입문</a></td><td>여러 수를 한 덩어리로 다루는 문법</td></tr>
+<tr><td>4</td><td><a href="probability-basics.html">확률·통계 입문</a></td><td>2·3번의 계산이 곧바로 쓰입니다</td></tr>
+<tr><td>5</td><td><a href="linear-algebra.html">선형대수</a></td><td>고유값을 스펙트럴 정리로 다시 봅니다</td></tr>
+<tr><td>6</td><td><a href="multivariable-calculus.html">다변수 미적분</a></td><td>변수가 여러 개인 미분 — 최적화의 언어</td></tr>
+<tr><td>7</td><td><a href="real-analysis-intro.html">해석학 입문</a></td><td>극한을 바꿔도 되는지 묻는 훈련</td></tr>
+<tr><td>8</td><td><a href="prob-foundations.html">확률론 기초</a></td><td>4번을 기호와 증명으로 다시 세웁니다</td></tr>
+<tr><td>9</td><td><a href="primer.html">측도·해석 프라이머</a></td><td>10번의 증명에 필요한 도구만 모은 상자</td></tr>
+<tr><td>10</td><td><a href="distributions.html">분포의 계보와 최대엔트로피</a></td><td>흩어진 분포들이 하나의 족으로 묶입니다</td></tr>
+<tr><td>11</td><td><a href="measure-theory.html">측도론</a></td><td>7·9번에서 미룬 증명을 완성합니다</td></tr>
+<tr><td>12</td><td><a href="complex-analysis.html">복소해석</a></td><td>꼬리 확률의 정확한 지수율</td></tr>
+<tr><td>13</td><td><a href="convex-optimization.html">볼록최적화</a></td><td>10번의 지수족이 켤레 쌍대로 다시 나타납니다</td></tr>
+<tr><td>14</td><td><a href="information-geometry.html">정보기하</a></td><td>13번의 켤레 구조를 기하로 봅니다</td></tr>
+<tr><td>15</td><td><a href="variational-inference.html">변분추론</a></td><td>14번의 정보투영을 실제로 푸는 알고리즘</td></tr>
+</tbody>
+</table>
 </div>
 
-<h2 id="s4"><span class="num">3</span>단계별 경로</h2>
-
-<h3>Phase A — 볼록성의 언어 확보</h3>
-<div class="checkpoint">
-<p><b>자료</b> · <a href="convex-optimization.html">볼록최적화</a> 2.1–2.4절</p>
-<p><b>목표</b> · 켤레함수와 브레그만 발산을 자유롭게 다루기. 이미 아는 지수족·MaxEnt가
-쌍대성의 사례임을 확인하기.</p>
-<p><b>통과 기준</b></p>
-<ul>
-<li>음의 엔트로피의 켤레가 로그-합-지수임을 계산으로 보입니다.</li>
-<li>KL이 브레그만 발산의 특수 경우임을 설명합니다.</li>
-<li>MaxEnt 문제의 KKT 조건에서 지수족이 나오는 과정을 재구성합니다.</li>
-</ul>
-</div>
-
-<h3>Phase B — 온라인 학습의 골격</h3>
-<div class="checkpoint">
-<p><b>자료</b> · <a href="convex-optimization.html">볼록최적화</a> 2.5–2.7절 →
-이론 트랙 <b>밴딧 이론</b> 편 앞부분(UCB, 후회 하한)</p>
-<p><b>목표</b> · 후회라는 지표에 익숙해지기. OGD 증명을 손으로 재현하기.</p>
-<p><b>통과 기준</b></p>
-<ul>
-<li>OGD의 \(O(\sqrt T)\) 후회를 백지에서 증명합니다.</li>
-<li>정적 후회와 동적 후회의 비교 대상 차이를 설명합니다.</li>
-<li>심플렉스 위 미러 디센트를 구현하고 차원 의존성 차이를 실험으로 확인합니다.</li>
-</ul>
-<p><b>산출물</b> · 후회 실험 노트북 하나. 이 시점에서 연구 문서의 '문제 설정' 절 초안을 쓸 수 있습니다.</p>
-</div>
-
-<h3>Phase C — 확률적 도구</h3>
-<div class="checkpoint">
-<p><b>자료</b> · <a href="measure-theory.html">측도론</a> 2.4·2.7·2.8절 →
-<a href="complex-analysis.html">복소해석</a> 2.6절 → 이론 트랙 <b>집중부등식</b> 편</p>
-<p><b>목표</b> · 마팅게일 집중을 도구로 쓸 수 있는 상태. 측도론 전체가 아니라
-조건부기대·도브 분해·아주마까지의 최단 경로입니다.</p>
-<p><b>통과 기준</b></p>
-<ul>
-<li>조건부기대를 사영으로 설명하고 타워 성질을 그 언어로 씁니다.</li>
-<li>도브 분해로 적응 과정을 드리프트 + 마팅게일로 쪼갭니다.</li>
-<li>체르노프 한계에서 속도함수가 켤레함수임을 알아봅니다(Phase A와 연결).</li>
-<li>아주마–회프딩을 증명하고, 밴딧의 신뢰구간이 이것에서 나옴을 설명합니다.</li>
-</ul>
-</div>
-
-<h3>Phase D — 비정상 환경과 조합 구조</h3>
-<div class="checkpoint">
-<p><b>자료</b> · 이론 트랙 <b>밴딧 이론</b> 편 후반(비정상·조합 밴딧) +
-<a href="convex-optimization.html">볼록최적화</a> 2.8절 → 이론 트랙 <b>서브모듈러</b> 편</p>
-<p><b>목표</b> · 연구 아이디어(국소 리셋)를 기존 결과와 정확히 대조할 수 있는 상태.</p>
-<p><b>통과 기준</b></p>
-<ul>
-<li>슬라이딩 윈도우·할인·리셋 계열 기법의 후회 한계를 비교표로 정리합니다.</li>
-<li>동적 후회 \(O(\sqrt{T(1+V_T)})\)의 증명 골격을 서술합니다.</li>
-<li>"국소 리셋이 \(V_T\)를 영향 영역으로 국한한다"를 <b>정리 진술 형태</b>로 씁니다.</li>
-</ul>
-<p><b>산출물</b> · 이론 트랙 문서의 정리 진술과 증명 계획. 여기가 이 로드맵의 실질적 목적지입니다.</p>
-</div>
-
-<h3>Phase E — 확장 (선택)</h3>
-<div class="checkpoint">
-<p><b>자료</b> · <a href="information-geometry.html">정보기하</a> →
-<a href="variational-inference.html">변분추론</a> → 이론 트랙 <b>정책경사</b> 편</p>
-<p><b>목표</b> · 리트리버를 정책으로 두는 정식화를 열어 두기.
-Phase D까지의 후회 분석이 완결된 뒤에 붙이는 것이 낫습니다 — 먼저 하면
-프레임워크가 필요 이상으로 커집니다.</p>
-<p><b>통과 기준</b></p>
-<ul>
-<li>자연경사를 KL 신뢰영역의 해로 유도합니다.</li>
-<li>점수함수 추정량과 재매개변수화 추정량의 적용 조건을 구분합니다.</li>
-<li>정책경사와 BBVI가 같은 식의 두 응용임을 설명합니다.</li>
-</ul>
-</div>
-
-<div class="env warn">
+<div class="env pitfall">
 <span class="env-label">순서에서 자주 어긋나는 지점</span>
-<p>정보기하가 매력적이어서 먼저 손이 갈 수 있습니다. 그러나 정보기하는
-<b>Phase A를 마친 뒤에 읽으면 절반의 시간에 두 배로 이해되는</b> 문서입니다.
-켤레함수 없이 읽으면 이중평탄 구조가 낯선 정의의 나열로 보이고,
-켤레함수를 알고 읽으면 이미 아는 것의 기하적 번역으로 보입니다.
-같은 이유로 변분추론은 정보기하 다음에 둡니다.</p>
+<p><b>13번 볼록최적화를 건너뛰고 14번 정보기하로 가지 마십시오.</b>
+켤레함수를 모르고 읽으면 이중평탄 구조가 낯선 정의의 나열로 보이고,
+알고 읽으면 이미 아는 것의 기하적 번역으로 보입니다. 같은 문서인데 체감 난이도가 두 배 차이납니다.</p>
+<p><b>11번 측도론을 처음부터 완독하려 하지 마십시오.</b>
+필요한 것은 조건부기대와 도브 분해까지입니다. 나머지는 필요할 때 돌아오면 됩니다.</p>
 </div>
 
-<h2 id="s5"><span class="num">4</span>2·3층 문서 색인</h2>
+<h2 id="s4"><span class="num">4</span>목적별 지름길</h2>
 
-<div class="tw">
-<table>
-<thead><tr><th>문서</th><th>핵심 도착점</th><th>어디로 이어지는가</th></tr></thead>
-<tbody>
-<tr><td><a href="prob-foundations.html">확률론 기초</a></td><td>변환 공식 · MGF · 세 부등식</td><td>본편 전체</td></tr>
-<tr><td><a href="linear-algebra.html">선형대수</a></td><td>스펙트럴 정리 · 사영 · 이차형식</td><td>공분산 · 피셔 계량 · 라플라시안</td></tr>
-<tr><td><a href="multivariable-calculus.html">다변수 미적분</a></td><td>라그랑주 승수 · 야코비안</td><td>MaxEnt 유도 · 계보 유도</td></tr>
-<tr><td><a href="real-analysis-intro.html">실해석 입문</a></td><td>완비성 · 균등수렴의 한계</td><td>측도론의 동기</td></tr>
-<tr><td><a href="primer.html">프라이머</a></td><td>젠센 · 횔더 · 감마 · 변분 도함수</td><td>본편의 증명 도구</td></tr>
-<tr><td><a href="distributions.html">분포 계보 · 지수족 · MaxEnt</a></td><td>ψ의 볼록성 · 적률 맞추기 · MaxEnt 정리</td><td>2·3층 전체의 씨앗</td></tr>
-<tr><td><a href="measure-theory.html">측도론</a></td><td>조건부기대 · 도브 분해 · 아주마</td><td>집중부등식 편</td></tr>
-<tr><td><a href="complex-analysis.html">복소해석</a></td><td>유수 정리 · 안장점법 · 크라메르</td><td>집중부등식 편 (정확한 지수율)</td></tr>
-<tr><td><a href="convex-optimization.html">볼록최적화</a></td><td>켤레 · 미러 디센트 · 후회 · 서브모듈러</td><td>밴딧 · 서브모듈러 · 정보기하</td></tr>
-<tr><td><a href="information-geometry.html">정보기하</a></td><td>이중평탄 · 정보투영 · 자연경사</td><td>변분추론 · 정책경사</td></tr>
-<tr><td><a href="variational-inference.html">변분추론</a></td><td>ELBO · CAVI · SVI · 두 추정량</td><td>정책경사 · 리트리버 정식화</td></tr>
-</tbody>
-</table>
-</div>
+<h3>기계학습을 이해하는 것이 목표라면</h3>
+<p>1 → 2 → 3 → 4 → 6 → 5 → 8 에서 멈춰도 충분합니다.
+경사하강, 손실함수, 확률모형을 읽는 데 필요한 것이 여기까지입니다.
+13번 볼록최적화의 앞부분을 더하면 최적화 논문의 수렴률 표를 읽을 수 있습니다.</p>
 
-<p>1층과 본편은 이미 학습한 내용이므로 <b>복습·참조용</b>입니다. 통과 기준 목록만 훑어보고
-막히는 항목이 있을 때 해당 절로 돌아가는 방식이 효율적입니다.
-2층 문서들은 프라이머의 도구(젠센·횔더·감마·변분 도함수)를 이미 아는 것으로 가정하고 시작합니다.</p>
+<h3>통계·데이터 분석이 목표라면</h3>
+<p>1 → 2 → 3 → 4 → 5 → 8 → 10.
+10번의 지수족과 최대엔트로피가 일반화선형모형(GLM)의 이론적 바탕입니다.</p>
 
-<h2 id="s6"><span class="num">5</span>병행 트랙을 다루는 법</h2>
+<h3>온라인 학습·후회 분석 연구가 목표라면</h3>
+<p>전체 순서를 따르되 <b>13 → 11(조건부기대·도브 분해) → 12(안장점법)</b>을 우선합니다.
+그다음이 집중부등식·밴딧·서브모듈러·정책경사로 이어지는 이론 트랙이고,
+14·15번은 정책경사의 배경 기하로 나중에 붙이면 됩니다.</p>
 
-<h3>③ 그래프 수학</h3>
-<p>스펙트럴 그래프 이론과 호지 라플라시안은 이미 HGAT 작업 중에 필요에 의해 익혔습니다.
-새 시간을 배분하지 말고, <b>이론 트랙에서 그래프 구조가 등장할 때 참조</b>하는 방식으로 씁니다.
-접점은 명확합니다 — 조합 밴딧의 팔(arm)이 부분그래프일 때 그 집합의 구조를 기술하는 언어가 여기입니다.
-서브모듈러 편에서 커버리지 함수를 다룰 때 다시 꺼내게 됩니다.</p>
-
-<h3>④ 수리언어학</h3>
-<p>Phase 4까지 완료된 독립 자산입니다. 연구와의 유일한 실질적 접점은 분기 지도의
-<b>DisCoCat(합성 분포 의미론)</b> 가지입니다 — 텍스트 구조와 벡터 표현을 잇는 형식이므로
-Text-to-SQL 스키마 링킹 쪽과 말이 됩니다. 다만 지금 이것을 열면 트랙이 셋이 되므로,
-Phase D를 통과한 뒤 <b>여유 시간의 읽을거리</b>로 두는 편이 낫습니다.</p>
-
-<h2 id="s7"><span class="num">6</span>운용 방식</h2>
+<h2 id="s5"><span class="num">5</span>공부하는 방식</h2>
 
 <ul>
-<li><b>한 문서 = 한 산출물.</b> 읽기만 한 문서는 통과한 것으로 치지 않습니다.
-각 문서 끝의 구현 과제가 최소 산출물입니다.</li>
-<li><b>증명은 한 번은 손으로.</b> 특히 OGD 후회, 아주마, MCT, CAVI 갱신식 넷은
-백지에서 재구성할 수 있어야 이후 논문이 읽힙니다.</li>
-<li><b>막히면 목적지로 되돌아갑니다.</b> "이 정리가 동적 후회 증명의 어느 줄에서 쓰이는가"를
-답할 수 없는 내용은 지금 건너뛰어도 되는 내용입니다.</li>
-<li><b>Obsidian 기록은 통과 기준 단위로.</b> 문서 단위 요약보다 통과 기준 항목별로
-"할 수 있음 / 아직"을 남기는 편이 재진입 비용을 줄입니다.</li>
+<li><b>초급은 손으로 씁니다.</b> 번호가 붙은 풀이 과정을 눈으로 따라가지 말고
+종이에 다시 쓰십시오. 예제를 가리고 스스로 푼 뒤 대조하는 편이 훨씬 남습니다.</li>
+<li><b>연습문제를 먼저 시도하고 해답을 봅니다.</b> 해답을 먼저 읽으면 "이해했다"는 착각이 생깁니다.</li>
+<li><b>중급부터는 증명을 한 번은 백지에서 재구성합니다.</b>
+특히 스펙트럴 정리, 단조수렴정리, 지수족의 볼록성, OGD 후회 넷은 꼭 그렇게 하십시오.</li>
+<li><b>막히면 이전 난이도로 돌아갑니다.</b> 중급이 어려운 것은 대개 초급의 어떤 개념이
+흐릿하기 때문입니다. 각 문서 앞의 <em>선수 지식</em> 줄이 어디로 돌아갈지 알려 줍니다.</li>
+<li><b>한 번에 두 편 이상 열지 않습니다.</b> 진행 중인 문서 하나, 복습용 하나까지가 한계입니다.</li>
 </ul>
 
 <div class="env ex">
 <span class="env-label">가장 먼저 할 일</span>
-<p>Phase A입니다. <a href="convex-optimization.html">볼록최적화</a> 2.3절의 켤레함수부터 시작해,
-이미 알고 있는 지수족의 \(\psi\)에 르장드르 변환을 직접 적용해 보십시오.
-그 계산이 끝나면 남은 경로 대부분이 "이미 아는 것의 다른 이름"으로 바뀝니다.</p>
+<p><a href="math-language.html">수학의 언어</a> 1절을 펴고, 표에 있는 집합 기호를
+소리 내어 읽어 보십시오. 전부 읽을 수 있다면 2절로,
+읽기 어려운 기호가 있다면 그 줄에서 멈춰 예제를 풀어 보시면 됩니다.</p>
 </div>
-<nav class="flow"><a href="prob-foundations.html"><span class="dir">다음 →</span><span class="ttl">확률론 기초</span></a></nav>
+<nav class="flow"><a href="math-language.html"><span class="dir">다음 →</span><span class="ttl">수학의 언어</span></a></nav>
 </main>
 </body>
 </html>
